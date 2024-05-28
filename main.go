@@ -17,7 +17,7 @@ func main() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "templates/index.html")
+	renderTemplate(w, "templates/front/termsanduses.html")
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string) {

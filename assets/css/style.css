@@ -1,0 +1,90 @@
+
+/* Variables del tema */
+:root {
+  --color-primario:hsl(162, 100%, 40%);
+  --color-primario2: hsl(162, 56%, 35%);
+  --color-secundario: hsl(228, 15%, 20%);
+  --color-secundario2: hsl(228, 15%, 15%);
+}
+
+.img-ilumination{
+  filter: brightness(0.45);
+}
+.my-text-color{
+  color: var(--color-primario);
+}
+
+.my-text-color-secundary{
+  color: var(--color-secundario);
+}
+
+.my-background{
+  background-color: var(--color-secundario2);
+}
+
+
+/* Modifico el navbar-link de bootraps */
+.my-navbar-link{
+  display: block;
+  padding: 0.5rem 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+/* Cambia el color del navbar-link cuando se pasa el cursor sobre él */
+.my-navbar-link:hover {
+  color: var(--color-primario); 
+}
+
+
+/* Cambio el thema de de los botones */
+.my-btn-outline-primary {
+  color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+.my-btn-outline-primary:hover {
+  color: #fff;
+  background-color:var(--color-primario);
+  border-color: var(--color-primario);
+}
+.my-btn-outline-primary:focus, .btn-outline-primary.focus {
+  box-shadow: 0 0 0 0.1rem var(--color-primario);
+}
+
+.my-btn-primary {
+  color: #fff;
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+.my-btn-primary:hover {
+  color: #fff;
+  background-color:var(--color-primario);
+  border-color: var(--color-primario);
+}
+.my-btn-primary:focus, .my-btn-primary:focus {
+  color: #fff;
+  background-color:var(--color-primario);
+  box-shadow: 0 0 0 0.1rem var(--color-primario);
+}
+
+
+/* Terminos y usos */
+
+#terminos p {
+  text-align: justify!important;
+  
+}
+
+#terminos li{
+  text-align: justify!important;
+}
+
+/* About */
+#about p{
+  text-align: justify;
+}
+
+.card-footer{
+  background-color: white;
+}
