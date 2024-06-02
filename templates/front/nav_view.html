@@ -3,7 +3,7 @@
     <!-- Barra de navegacion -->
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="{{.BaseURL}}">
+            <a class="navbar-brand fw-bold" href="/">
                 <img class="mx-1 mb-1" src="/assets/img/icons/logo.png" alt="" width="25" height="25">
                 <span>Mountain<span class="my-text-color">Tech</span></span>
             </a>
@@ -15,19 +15,19 @@
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}">
+                        <a class="my-navbar-link" aria-current="page" href="/">
                             <img src="/assets/img/icons/home.svg" alt="" height="25px" width="25px">
                             Inicio
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}products">
+                        <a class="my-navbar-link" aria-current="page" href="/products">
                             <img src="/assets/img/icons/shopping.svg" alt="" height="25px" width="25px">
                             Productos
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}contact">
+                        <a class="my-navbar-link" aria-current="page" href="/contact">
                             <img src="/assets/img/icons/contact.svg" alt="" height="25px" width="25px">
                             Contacto
                         </a>
@@ -35,66 +35,66 @@
 
                     {{if eq .IDProfile 1}}
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}users">
+                        <a class="my-navbar-link" aria-current="page" href="/users">
                             <img src="/assets/img/icons/group.svg" alt="" height="25px" width="25px">
                             Usuarios
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}list-consults">
+                        <a class="my-navbar-link" aria-current="page" href="/list-consults">
                             <img src="/assets/img/icons/mail.svg" alt="" height="25px" width="25px">
                             Consultas
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}list-sales">
+                        <a class="my-navbar-link" aria-current="page" href="/list-sales">
                             <img src="/assets/img/icons/list.svg" alt="" height="25px" width="25px">
                             Pedidos
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}user-profile">
+                        <a class="my-navbar-link" aria-current="page" href="/user-profile">
                             <img src="/assets/img/icons/account.svg" alt="" height="25px" width="25px">
                             Mis Datos
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a href="{{.BaseURL}}login-out"><button type="button" class="btn btn-danger fw-bold">
+                        <a href="/login-out"><button type="button" class="btn btn-danger fw-bold">
                             <img src="/assets/img/icons/logout.svg" alt="" height="25px" width="25px">
                             Logout
                         </button></a>
                     </li>
                     {{else if eq .IDProfile 2}}
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}list-sales-user">
+                        <a class="my-navbar-link" aria-current="page" href="/list-sales-user">
                             <img src="/assets/img/icons/list.svg" alt="" height="25px" width="25px">
                             Pedidos
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}cart-list">
+                        <a class="my-navbar-link" aria-current="page" href="/cart-list">
                             <img src="/assets/img/icons/cart.svg" alt="" height="25px" width="25px">
                             Carrito
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a class="my-navbar-link" aria-current="page" href="{{.BaseURL}}user-profile">
+                        <a class="my-navbar-link" aria-current="page" href="/user-profile">
                             <img src="/assets/img/icons/account.svg" alt="" height="25px" width="25px">
                             Mis Datos
                         </a>
                     </li>
                     <li class="nav-item m-1">
-                        <a href="{{.BaseURL}}login-out"><button type="button" class="btn btn-danger fw-bold">
+                        <a href="/login-out"><button type="button" class="btn btn-danger fw-bold">
                             <img src="/assets/img/icons/logout.svg" alt="" height="25px" width="25px">
                             Logout
                         </button></a>
                     </li>
                     {{else}}
                     <li class="nav-item m-1">
-                        <a href="{{.BaseURL}}login"><button type="button" class="btn my-btn-outline-primary fw-bold">Login</button></a>
+                        <a href="/login"><button type="button" class="btn my-btn-outline-primary fw-bold">Login</button></a>
                     </li>
                     <li class="nav-item m-1">
-                        <a href="{{.BaseURL}}signup"><button type="button" class="btn my-btn-primary fw-bold">Sign-up</button></a>
+                        <a href="/signup"><button type="button" class="btn my-btn-primary fw-bold">Sign-up</button></a>
                     </li>
                     {{end}}
                 </ul>
