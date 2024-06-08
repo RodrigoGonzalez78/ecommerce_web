@@ -2,6 +2,8 @@ package utils
 
 import (
 	"net/http"
+	"os"
+	"path/filepath"
 	"text/template"
 )
 
@@ -65,4 +67,23 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, data map[string]interfac
 		return
 	}
 
+}
+
+func FileOnlyHandler(root http.Dir) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		path := filepath.Join(string(root), r.URL.Path)
+		info, err := os.Stat(path)
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+
+		// Verificar si la ruta es un archivo
+		if info.IsDir() {
+			http.NotFound(w, r)
+			return
+		}
+
+		http.ServeFile(w, r, path)
+	})
 }

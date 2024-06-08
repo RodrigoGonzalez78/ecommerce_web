@@ -5,12 +5,13 @@ import (
 	"net/http"
 
 	"github.com/RodrigoGonzalez78/ecommerce_web/routes"
+	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
 func main() {
 
-	// Configura el manejador de archivos estáticos para servir archivos desde el directorio "assets"
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+	assetsDir := http.Dir("assets")
+	http.Handle("/assets/", http.StripPrefix("/assets/", utils.FileOnlyHandler(assetsDir)))
 
 	http.HandleFunc("/", routes.HomeHandler)
 	http.HandleFunc("/termsanduses", routes.Terminos)
