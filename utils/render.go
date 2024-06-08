@@ -48,8 +48,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, data map[string]interfac
 	}
 
 	nav := map[string]interface{}{
-		"IDProfile": 1,
-		"BaseURL":   "localhost:8080",
+		"IDProfile": 2,
 	}
 	if err := navTemplate.Execute(w, nav); err != nil {
 		http.Error(w, "No se pudo renderizar la navegación", http.StatusInternalServerError)

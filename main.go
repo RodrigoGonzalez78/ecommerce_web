@@ -13,9 +13,9 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 
 	http.HandleFunc("/", routes.HomeHandler)
-
+	http.HandleFunc("/termsanduses", routes.Terminos)
+	http.HandleFunc("/about", routes.About)
 	log.Println("Servidor iniciado en el puerto 8080")
-
 	err := http.ListenAndServe(":8080", nil)
 
 	if err != nil {
