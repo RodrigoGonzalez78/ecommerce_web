@@ -1,11 +1,11 @@
-package routes
+package utils
 
 import (
 	"net/http"
 	"time"
 )
 
-func setCookieHandler(w http.ResponseWriter, r *http.Request) {
+func SetCookieHandler(w http.ResponseWriter, r *http.Request) {
 	expiration := time.Now().Add(365 * 24 * time.Hour)
 	cookie := http.Cookie{
 		Name:     "username",
@@ -17,7 +17,7 @@ func setCookieHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Cookie has been set!"))
 }
 
-func getCookieHandler(w http.ResponseWriter, r *http.Request) {
+func GetCookieHandler(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("username")
 	if err != nil {
 		if err == http.ErrNoCookie {

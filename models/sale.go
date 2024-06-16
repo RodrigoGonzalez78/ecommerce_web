@@ -14,10 +14,6 @@ type Sale struct {
 	CreatedAt  time.Time `gorm:"column:created_at"`
 }
 
-func (Sale) TableName() string {
-	return "sales"
-}
-
 func CreateSale(db *gorm.DB, data Sale) error {
 	if err := db.Create(&data).Error; err != nil {
 		return err

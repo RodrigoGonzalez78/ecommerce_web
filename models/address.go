@@ -15,10 +15,6 @@ type Address struct {
 	CreatedAt    time.Time `gorm:"column:created_at"`
 }
 
-func (Address) TableName() string {
-	return "address"
-}
-
 func CreateAddress(db *gorm.DB, data Address) error {
 	if err := db.Create(&data).Error; err != nil {
 		return err

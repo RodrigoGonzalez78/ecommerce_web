@@ -12,10 +12,6 @@ type Profile struct {
 	CreatedAt   time.Time `gorm:"column:created_at"`
 }
 
-func (Profile) TableName() string {
-	return "profile"
-}
-
 func GetProfiles(db *gorm.DB) ([]Profile, error) {
 	var profiles []Profile
 	if err := db.Find(&profiles).Error; err != nil {

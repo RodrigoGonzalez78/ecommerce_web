@@ -18,10 +18,6 @@ type Product struct {
 	CreatedAt   time.Time `gorm:"column:created_at"`
 }
 
-func (Product) TableName() string {
-	return "products"
-}
-
 func GetProduct(db *gorm.DB, id uint) (*Product, error) {
 	var product Product
 	if err := db.First(&product, id).Error; err != nil {

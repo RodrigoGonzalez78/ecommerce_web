@@ -12,10 +12,6 @@ type Categorie struct {
 	CreatedAt time.Time `gorm:"column:created_at"`
 }
 
-func (Categorie) TableName() string {
-	return "categories"
-}
-
 func GetCategories(db *gorm.DB) ([]Categorie, error) {
 	var categories []Categorie
 	if err := db.Find(&categories).Error; err != nil {

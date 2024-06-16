@@ -16,10 +16,6 @@ type Consult struct {
 	CreatedAt   time.Time `gorm:"column:created_at"`
 }
 
-func (Consult) TableName() string {
-	return "consults"
-}
-
 func CreateConsult(db *gorm.DB, data Consult) error {
 	if err := db.Create(&data).Error; err != nil {
 		return err

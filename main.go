@@ -16,6 +16,11 @@ func main() {
 	http.HandleFunc("/", routes.HomeHandler)
 	http.HandleFunc("/termsanduses", routes.Terminos)
 	http.HandleFunc("/about", routes.About)
+
+	http.HandleFunc("/login-page", routes.About)
+	http.HandleFunc("/sign-up-page", routes.About)
+	http.HandleFunc("/contact-me-page", routes.ContactMePage)
+
 	log.Println("Servidor iniciado en el puerto 8080")
 	err := http.ListenAndServe(":8080", nil)
 
