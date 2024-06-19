@@ -17,8 +17,8 @@ func main() {
 	http.HandleFunc("/termsanduses", routes.Terminos)
 	http.HandleFunc("/about", routes.About)
 
-	http.HandleFunc("/login-page", routes.About)
-	http.HandleFunc("/sign-up-page", routes.About)
+	http.HandleFunc("/login-page", routes.LoginPage)
+	http.HandleFunc("/sign-up-page", routes.SignUpPage)
 	http.HandleFunc("/contact-me-page", routes.ContactMePage)
 
 	log.Println("Servidor iniciado en el puerto 8080")
