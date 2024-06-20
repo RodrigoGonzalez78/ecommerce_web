@@ -33,3 +33,9 @@ func UpdateUser(id uint, data map[string]interface{}) error {
 	}
 	return nil
 }
+
+// CreateUser crea un nuevo usuario en la base de datos
+func CreateUser(user *models.User) error {
+	result := db.Create(user)
+	return result.Error
+}

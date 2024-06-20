@@ -3,6 +3,8 @@ package routes
 import (
 	"net/http"
 
+	"github.com/RodrigoGonzalez78/ecommerce_web/db"
+	"github.com/RodrigoGonzalez78/ecommerce_web/models"
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
@@ -49,7 +51,12 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Aquí agregarías la lógica para registrar al usuario
-		// ...
+		db.CreateUser(&models.User{
+			Name:     name,
+			LastName: lastName,
+			Password: password,
+			Email:    email,
+		})
 
 		// Redirige al usuario a una página de éxito o inicio de sesión
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
