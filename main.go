@@ -4,11 +4,14 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/RodrigoGonzalez78/ecommerce_web/db"
 	"github.com/RodrigoGonzalez78/ecommerce_web/routes"
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
 func main() {
+
+	db.DBConnection()
 
 	assetsDir := http.Dir("assets")
 	http.Handle("/assets/", http.StripPrefix("/assets/", utils.FileOnlyHandler(assetsDir)))

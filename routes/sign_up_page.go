@@ -52,10 +52,11 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 
 		// Aquí agregarías la lógica para registrar al usuario
 		db.CreateUser(&models.User{
-			Name:     name,
-			LastName: lastName,
-			Password: password,
-			Email:    email,
+			Name:      name,
+			LastName:  lastName,
+			Password:  password,
+			Email:     email,
+			IDProfile: 1,
 		})
 
 		// Redirige al usuario a una página de éxito o inicio de sesión
