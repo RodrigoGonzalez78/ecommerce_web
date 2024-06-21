@@ -4,7 +4,10 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"regexp"
 	"text/template"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func RenderTemplate(w http.ResponseWriter, tmpl string, data map[string]interface{}) {
@@ -50,7 +53,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, data map[string]interfac
 	}
 
 	nav := map[string]interface{}{
-		"IDProfile": 4,
+		"IDProfile": RolID,
 	}
 	if err := navTemplate.Execute(w, nav); err != nil {
 		http.Error(w, "No se pudo renderizar la navegación", http.StatusInternalServerError)
@@ -86,4 +89,22 @@ func FileOnlyHandler(root http.Dir) http.Handler {
 
 		http.ServeFile(w, r, path)
 	})
+}
+
+func IsValidEmail(email string) bool {
+	const emailRegex = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+	re := regexp.MustCompile(emailRegex)
+	return re.MatchString(email)
+}
+
+// HashPassword encripta la contraseña usando bcrypt.
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	return string(bytes), err
+}
+
+// CheckPasswordHash compara una contraseña en texto claro con su hash.
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }

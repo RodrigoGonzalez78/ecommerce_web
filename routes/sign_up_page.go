@@ -37,7 +37,10 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 		}
 		if email == "" {
 			data["error"].(map[string]string)["email"] = "El correo electrónico es obligatorio"
+		} else if !utils.IsValidEmail(email) {
+			data["error"].(map[string]string)["email"] = "El correo electrónico no es válido"
 		}
+
 		if password == "" {
 			data["error"].(map[string]string)["password"] = "La contraseña es obligatoria"
 		} else if len(password) < 8 {
@@ -50,17 +53,28 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// Encriptar la contraseña
+		hashedPassword, err := utils.HashPassword(password)
+		if err != nil {
+			http.Error(w, "Error al encriptar la contraseña", http.StatusInternalServerError)
+			return
+		}
+
 		// Aquí agregarías la lógica para registrar al usuario
-		db.CreateUser(&models.User{
+		err = db.CreateUser(&models.User{
 			Name:      name,
 			LastName:  lastName,
-			Password:  password,
+			Password:  hashedPassword,
 			Email:     email,
-			IDProfile: 1,
+			IDProfile: 2,
 		})
+		if err != nil {
+			http.Error(w, "Error al registrar el usuario", http.StatusInternalServerError)
+			return
+		}
 
 		// Redirige al usuario a una página de éxito o inicio de sesión
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		http.Redirect(w, r, "/login-page", http.StatusSeeOther)
 		return
 	}
 

@@ -5,18 +5,18 @@ import (
 	"gorm.io/gorm"
 )
 
-func CheckExistUser(email string) (bool, error) {
+func CheckExistUser(email string) (bool, models.User, error) {
 	var user models.User
 	result := db.Where("email = ?", email).First(&user)
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
-			return false, nil
+			return false, user, nil
 		}
-		return false, result.Error
+		return false, user, result.Error
 	}
 
-	return true, nil
+	return true, user, nil
 }
 
 func GetUser(id uint) (*models.User, error) {

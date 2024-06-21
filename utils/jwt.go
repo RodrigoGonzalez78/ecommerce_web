@@ -79,7 +79,7 @@ func ProcessToken(tokenString string) (*Claim, bool, uint, error) {
 
 	if token.Valid {
 		// Verificar si el usuario existe en la base de datos
-		found, err := db.CheckExistUser(claim.Email)
+		found, _, err := db.CheckExistUser(claim.Email)
 		if err != nil {
 			return claim, false, 0, err
 		}
