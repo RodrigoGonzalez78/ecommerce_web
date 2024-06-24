@@ -43,19 +43,12 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, data map[string]interfac
 	// Renderizar los archivos HTML
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-	title := map[string]interface{}{
-		"Titulo": "Home",
-	}
-
-	if err := headerTemplate.Execute(w, title); err != nil {
+	if err := headerTemplate.Execute(w, data); err != nil {
 		http.Error(w, "No se pudo renderizar el encabezado", http.StatusInternalServerError)
 		return
 	}
 
-	nav := map[string]interface{}{
-		"IDProfile": RolID,
-	}
-	if err := navTemplate.Execute(w, nav); err != nil {
+	if err := navTemplate.Execute(w, data); err != nil {
 		http.Error(w, "No se pudo renderizar la navegación", http.StatusInternalServerError)
 		return
 	}

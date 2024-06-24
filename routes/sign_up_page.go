@@ -10,6 +10,12 @@ import (
 
 func SignUpPage(w http.ResponseWriter, r *http.Request) {
 
+	userData, _ := r.Context().Value("userData").(*models.Claim)
+
+	if userData.RolID != 0 {
+		http.Redirect(w, r, "/home-page", http.StatusSeeOther)
+	}
+
 	if r.Method == http.MethodPost {
 		// Recoge los datos del formulario
 		name := r.FormValue("name")
@@ -67,7 +73,9 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 			Password:  hashedPassword,
 			Email:     email,
 			IDProfile: 2,
+			Down:      "NO",
 		})
+
 		if err != nil {
 			http.Error(w, "Error al registrar el usuario", http.StatusInternalServerError)
 			return
@@ -80,6 +88,8 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 
 	// Si el método no es POST, muestra el formulario vacío
 	data := map[string]interface{}{
+		"Titulo":    "Home",
+		"IDProfile": userData.RolID,
 		"values": map[string]string{
 			"name":      "",
 			"last_name": "",

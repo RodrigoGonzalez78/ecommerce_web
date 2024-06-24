@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/RodrigoGonzalez78/ecommerce_web/db"
+	"github.com/RodrigoGonzalez78/ecommerce_web/models"
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
@@ -14,8 +15,21 @@ const (
 )
 
 func LoginPage(w http.ResponseWriter, r *http.Request) {
+
+	userData, _ := r.Context().Value("userData").(*models.Claim)
+
+	data := map[string]interface{}{
+		"Titulo":    "Home",
+		"IDProfile": userData.RolID,
+	}
+
+	if userData.RolID != 0 {
+		http.Redirect(w, r, "/home-page", http.StatusSeeOther)
+	}
+
 	if r.Method != http.MethodPost {
-		utils.RenderTemplate(w, "templates/back/users/login.html", nil)
+
+		utils.RenderTemplate(w, "templates/back/users/login.html", data)
 		return
 	}
 

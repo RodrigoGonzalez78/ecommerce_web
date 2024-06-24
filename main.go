@@ -17,13 +17,13 @@ func main() {
 	assetsDir := http.Dir("assets")
 	http.Handle("/assets/", http.StripPrefix("/assets/", utils.FileOnlyHandler(assetsDir)))
 
-	http.HandleFunc("/", routes.HomeHandler)
+	http.HandleFunc("/", middleware.CheckJwt(routes.HomeHandler))
 	http.HandleFunc("/termsanduses", middleware.CheckJwt(routes.Terminos))
 	http.HandleFunc("/about", routes.About)
 
-	http.HandleFunc("/login-page", routes.LoginPage)
-	http.HandleFunc("/sign-up-page", routes.SignUpPage)
-	http.HandleFunc("/contact-me-page", routes.ContactMePage)
+	http.HandleFunc("/login-page", middleware.CheckJwt(routes.LoginPage))
+	http.HandleFunc("/sign-up-page", middleware.CheckJwt(routes.SignUpPage))
+	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
 
 	log.Println("Servidor iniciado en el puerto 8080")
 	err := http.ListenAndServe(":8080", nil)

@@ -12,20 +12,10 @@ import (
 // SecretKey para firmar el token JWT
 var SecretKey = []byte("HarwareStore")
 
-// Claim define los datos que se almacenarán en el token JWT
-type Claim struct {
-	Email    string `json:"email"`
-	RolID    uint   `json:"rolId"`
-	Name     string `json:"name"`
-	LastName string `json:"lastName"`
-	ID       uint   `json:"id"`
-	jwt.RegisteredClaims
-}
-
 // CreateToken genera un token JWT para un usuario dado
 func CreateToken(user models.User) (string, error) {
 	// Crear el payload del token con los datos del usuario
-	payload := Claim{
+	payload := models.Claim{
 		Email:    user.Email,
 		RolID:    user.IDProfile,
 		Name:     user.Name,
@@ -48,16 +38,9 @@ func CreateToken(user models.User) (string, error) {
 	return tokenString, nil
 }
 
-// Variables globales para almacenar datos de los endpoints
-var (
-	Email  string
-	IDUser uint
-	RolID  uint
-)
-
 // ProcessToken extrae y valida los datos del token JWT
-func ProcessToken(tokenString string) (*Claim, bool, uint, error) {
-	claim := &Claim{}
+func ProcessToken(tokenString string) (*models.Claim, bool, uint, error) {
+	claim := &models.Claim{}
 
 	// Parsear el token con las reclamaciones y la clave secreta
 	token, err := jwt.ParseWithClaims(tokenString, claim, func(t *jwt.Token) (interface{}, error) {
@@ -75,10 +58,7 @@ func ProcessToken(tokenString string) (*Claim, bool, uint, error) {
 			return claim, false, 0, err
 		}
 		if found {
-			Email = claim.Email
-			IDUser = claim.ID
-			RolID = claim.RolID
-			return claim, true, IDUser, nil
+			return claim, true, claim.ID, nil
 		}
 		return claim, false, 0, errors.New("usuario no encontrado")
 	}
