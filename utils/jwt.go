@@ -2,7 +2,6 @@ package utils
 
 import (
 	"errors"
-	"strings"
 	"time"
 
 	"github.com/RodrigoGonzalez78/ecommerce_web/db"
@@ -59,14 +58,6 @@ var (
 // ProcessToken extrae y valida los datos del token JWT
 func ProcessToken(tokenString string) (*Claim, bool, uint, error) {
 	claim := &Claim{}
-
-	// Dividir el token para obtener solo el valor sin el prefijo "Bearer"
-	splitToken := strings.Split(tokenString, "Bearer")
-	if len(splitToken) != 2 {
-		return claim, false, 0, errors.New("formato de token inválido")
-	}
-
-	tokenString = strings.TrimSpace(splitToken[1])
 
 	// Parsear el token con las reclamaciones y la clave secreta
 	token, err := jwt.ParseWithClaims(tokenString, claim, func(t *jwt.Token) (interface{}, error) {

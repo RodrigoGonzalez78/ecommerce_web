@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -39,8 +38,6 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, errInvalidCredentials, http.StatusUnauthorized)
 		return
 	}
-
-	fmt.Println(utils.HashPassword(password))
 
 	tokenString, err := utils.CreateToken(user)
 
