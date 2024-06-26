@@ -19,10 +19,12 @@ func main() {
 
 	http.HandleFunc("/", middleware.CheckJwt(routes.HomeHandler))
 	http.HandleFunc("/termsanduses", middleware.CheckJwt(routes.Terminos))
-	http.HandleFunc("/about", routes.About)
+	http.HandleFunc("/about", middleware.CheckJwt(routes.About))
 
 	http.HandleFunc("/login-page", middleware.CheckJwt(routes.LoginPage))
 	http.HandleFunc("/sign-up-page", middleware.CheckJwt(routes.SignUpPage))
+	http.HandleFunc("/logout", middleware.CheckJwt(routes.Logout))
+
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
 
 	log.Println("Servidor iniciado en el puerto 8080")
