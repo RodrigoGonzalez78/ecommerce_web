@@ -11,6 +11,7 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/db"
 	"github.com/RodrigoGonzalez78/ecommerce_web/models"
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
+	"github.com/google/uuid"
 )
 
 func NewProduct(w http.ResponseWriter, r *http.Request) {
@@ -31,9 +32,13 @@ func NewProduct(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 
-		uploadDir := "/assets/uploads"
+		// Generate a random filename with the same extension
+		extension := filepath.Ext(handler.Filename)
+		randomFileName := uuid.New().String() + extension
+
+		uploadDir := "assets/uploads"
 		os.MkdirAll(uploadDir, os.ModePerm)
-		imagePath := filepath.Join(uploadDir, handler.Filename)
+		imagePath := filepath.Join(uploadDir, randomFileName)
 
 		dst, err := os.Create(imagePath)
 
