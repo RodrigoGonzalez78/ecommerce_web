@@ -26,7 +26,9 @@ func main() {
 	http.HandleFunc("/logout", middleware.CheckJwt(routes.Logout))
 
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
+
 	http.HandleFunc("/products-page", middleware.CheckJwt(routes.ProductsPage))
+	http.HandleFunc("/new-product", middleware.CheckJwt(middleware.AdminCheck(routes.NewProduct)))
 
 	log.Println("Servidor iniciado en el puerto 8080")
 	err := http.ListenAndServe(":8080", nil)

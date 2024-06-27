@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/RodrigoGonzalez78/ecommerce_web/models"
@@ -25,7 +24,7 @@ func CheckJwt(next http.HandlerFunc) http.HandlerFunc {
 				LastName: "",
 			}
 			ctx := context.WithValue(r.Context(), "userData", voidClaim)
-			fmt.Println(1)
+
 			// Pasar la solicitud al siguiente manejador con el contexto actualizado
 			next.ServeHTTP(w, r.WithContext(ctx))
 			return
@@ -47,7 +46,7 @@ func CheckJwt(next http.HandlerFunc) http.HandlerFunc {
 				LastName: "",
 			}
 			ctx := context.WithValue(r.Context(), "userData", voidClaim)
-			fmt.Println(2)
+
 			// Pasar la solicitud al siguiente manejador con el contexto actualizado
 			next.ServeHTTP(w, r.WithContext(ctx))
 			return
@@ -55,8 +54,6 @@ func CheckJwt(next http.HandlerFunc) http.HandlerFunc {
 
 		// Crear un nuevo contexto con los datos del usuario obtenidos del token
 		ctx := context.WithValue(r.Context(), "userData", claim)
-		fmt.Println(3)
-		fmt.Println(claim)
 		// Pasar la solicitud al siguiente manejador con el contexto actualizado
 		next.ServeHTTP(w, r.WithContext(ctx))
 	}

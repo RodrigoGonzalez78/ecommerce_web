@@ -56,7 +56,7 @@ func UpdateProduct(db *gorm.DB, id uint, data map[string]interface{}) error {
 	return nil
 }
 
-func CreateProduct(db *gorm.DB, data models.Product) error {
+func CreateProduct(data models.Product) error {
 	if err := db.Create(&data).Error; err != nil {
 		return err
 	}
