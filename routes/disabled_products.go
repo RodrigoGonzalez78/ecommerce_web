@@ -8,14 +8,15 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
-func ProductsPage(w http.ResponseWriter, r *http.Request) {
+func DisabledProductsPage(w http.ResponseWriter, r *http.Request) {
+
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 
-	productList, _ := db.GetEnabledProducts()
+	productList, _ := db.GetDisabledProducts()
 	categoriesList, _ := db.GetCategories()
 
 	data := map[string]interface{}{
-		"Titulo":     "Products",
+		"Titulo":     "Products Inactivos",
 		"IDProfile":  userData.RolID,
 		"Products":   productList,
 		"Categories": categoriesList,
@@ -23,5 +24,5 @@ func ProductsPage(w http.ResponseWriter, r *http.Request) {
 		"Error":      false,
 	}
 
-	utils.RenderTemplate(w, "templates/back/products/products.html", data)
+	utils.RenderTemplate(w, "templates/back/products/disabled_products.html", data)
 }

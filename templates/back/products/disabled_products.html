@@ -1,12 +1,3 @@
-<div>
-    <?php if (session()->getFlashdata('success')) {
-        echo "
-      <div class='mt-3 mb-3 ms-3 me-3 h4 text-center alert alert-success alert-dismissible'>
-      <button type='button' class='btn-close' data-bs-dismiss='alert'></button>" . session()->getFlashdata('success') . "
-  </div>";
-    }
-    ?>
-</div>
 
 
 <div class="container">
@@ -15,20 +6,81 @@
     <hr>
 
     <div class="row m-2">
-
-
-        <?php
-
-        foreach ($products as $product) {
-        ?>
-            <!-- Incluir la vista product_card para cada producto -->
-            <?php echo view('back/products/component/product_card', ['product' => $product]); ?>
-        <?php
-        }
-
-        ?>
-
-
-
+        {{range .Products}}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-5">
+            <div class="card h-100 text-center p-1">
+                <img src="/assets/uploads/{{.Image}}" class="card-img-top" alt="Imagen del producto">
+                <div class="card-body">
+                    <h4 class="card-title">{{.Name}}</h4>
+                    <h5 class="fw-bold">Precio: <span class="my-text-color">{{.Price}}</span></h5>
+                    <h5 class="fw-bold">Stock: <span class="my-text-color">{{.Stock}}</span></h5>
+                </div>
+                <div class="container card-footer">
+                    <div class="row">
+                        
+                        {{if eq $.IDProfile 1}}
+                        
+                            <div class="col-6">
+                                <a href="/edit-product?id={{.ID}}"><button type="button" class="btn my-btn-primary">Editar</button></a>
+                            </div>
+                            {{if eq .Down "SI"}}
+                                <div class="col-6">
+                                    <a href="/enable-product?id={{.ID}}"><button type="button" class="btn btn-danger">Activar</button></a>
+                                </div>
+                            {{else}}
+                                <div class="col-6">
+                                    <a href="/disable-product?id={{.ID}}"><button type="button" class="btn btn-danger">Desactivar</button></a>
+                                </div>
+                            {{end}}
+                       
+                        {{else}}
+                       
+                            <div class="col-6">
+                                <button type="button" class="btn my-btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{.ID}}">Ampliar</button>
+                            </div>
+                            {{if le .Stock 0}}
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-secondary">Comprar</button>
+                                </div>
+                            {{else}}
+                                <div class="col-6">
+                                    <a href="/add-cart?id={{.ID}}"><button type="button" class="btn btn-danger">Comprar</button></a>
+                                </div>
+                            {{end}}
+                            
+                        {{end}}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="modal{{.ID}}" tabindex="-1" aria-labelledby="modalLabel{{.ID}}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel{{.ID}}">{{.Name}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                        <p>{{.Description}}</p>
+                        <h3>Tipos de entregas</h3>
+                        <p>Los tiempos de entregas van normalmente de 2 a 5 días.</p>
+                        <h3>Formas de envío</h3>
+                        <p>Los envíos se realizan a través de nuestra compañía de envíos asociada. Los precios y tiempos de entrega pueden variar dependiendo de la dirección de entrega.</p>
+                        <h3>Formas de pago</h3>
+                        <p>Aceptamos tarjetas de débito y crédito, así como también Mercado Pago. Puedes realizar tu compra de forma segura y cómoda utilizando cualquiera de estos métodos de pago.</p>
+                        <h5 class="fw-bold">Precio: <span class="my-text-color">{{.Price}}</span></h5>
+                        <h5 class="fw-bold">Stock: <span class="my-text-color">{{.Stock}}</span></h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <a href="/add-cart?id={{.ID}}"><button type="button" class="btn btn-danger">Comprar</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{end}}
     </div>
 </div>
