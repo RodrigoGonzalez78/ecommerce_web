@@ -22,8 +22,8 @@ func ContactMePage(w http.ResponseWriter, r *http.Request) {
 			Name:        r.FormValue("name"),
 			Email:       r.FormValue("email"),
 			Description: r.FormValue("description"),
-			Attended:    "No",
-			Archived:    "No",
+			Attended:    "NO",
+			Archived:    "NO",
 		}
 
 		err = db.CreateConsult(consult)

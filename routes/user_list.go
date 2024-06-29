@@ -20,5 +20,5 @@ func UserList(w http.ResponseWriter, r *http.Request) {
 		"Success":   false,
 		"Error":     false,
 	}
-	utils.RenderTemplate(w, "templates/back/consults/consult_list.html", data)
+	utils.RenderTemplate(w, "templates/back/users/user_list.html", data)
 }
