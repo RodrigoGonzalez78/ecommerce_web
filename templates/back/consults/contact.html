@@ -24,9 +24,9 @@
             </div>
         </div>
         <div class="card col-md-6 my-background">
-            <div class="card-body p-4 ">
+            <div class="card-body p-4">
                 <h1 class="fs-4 card-title fw-bold mb-4 text-center my-text-color">Contáctanos</h1>
-                <form method="post" action="/contact">
+                <form method="post" action="/contact-me-page">
                     <div class="mb-3">
                         <label for="name" class="form-label text-white fw-bold">Nombre Completo</label>
                         <input name="name" type="text" class="form-control" placeholder="Rodrigo Gonzalez">
@@ -44,6 +44,16 @@
                         <input type="submit" value="Enviar" class="btn my-btn-primary ms-auto fw-bold">
                     </div>
                 </form>
+                {{if .Success}}
+                    <div class="alert alert-success mt-3" role="alert">
+                        Consulta enviada con éxito.
+                    </div>
+                {{end}}
+                {{if .Error}}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        Error al enviar la consulta. Inténtelo de nuevo.
+                    </div>
+                {{end}}
             </div>
         </div>
     </div>

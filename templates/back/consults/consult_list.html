@@ -1,25 +1,4 @@
-
-<div class="container m-4">
-    <div class="row">
-        <div class="col">
-            <h4>
-                Lista de consultas
-            </h4>
-        </div>
-
-        <div class="col-auto"> 
-            <a href="<?php echo base_url("/archived-list-consults") ?>">
-                <button class="btn btn-danger">
-                    <img src="assets/img/icons/archive.svg" width="20px" height="20px" alt="Archivar">
-                    Archivados
-                </button>
-            </a>
-        </div>
-    </div>
-</div>
-
 <div class="container mx-5">
-
     <table class="table">
         <thead class="table-dark">
             <tr>
@@ -29,34 +8,30 @@
                 <th>Atendido/Leido</th>
                 <th>Mensaje</th>
                 <th>Opciones</th>
-
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($consults as $consult) : ?>
-                <tr>
-                    <td><?php echo $consult['id']; ?></td>
-                    <td><?php echo $consult['name']; ?></td>
-                    <td><?php echo $consult['email']; ?></td>
-                    <td><?php echo $consult['attended']; ?></td>
-                    <td><?php echo $consult['description']; ?></td>
-                    <td>
-                        <a href="<?php echo base_url('/attended-consults?id='.$consult['id']) ?>">
-                            <button class="btn my-btn-primary">
-                                <img src="assets/img/icons/done.svg" width="20px" height="20px" alt="Atendido">
-                            </button>
-                        </a>
-
-                        <a href="<?php echo base_url('/archive-consult?id='.$consult['id']) ?>">
-                            <button class="btn btn-danger">
-                                <img src="assets/img/icons/archive.svg" width="20px" height="20px" alt="Archivar">
-                            </button>
-                        </a>
-
-                    </td>
-
-                </tr>
-            <?php endforeach; ?>
+            {{range .Consults}}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.Name}}</td>
+                <td>{{.Email}}</td>
+                <td>{{.Attended}}</td>
+                <td>{{.Description}}</td>
+                <td>
+                    <a href="/attended-consults?id={{.ID}}">
+                        <button class="btn my-btn-primary">
+                            <img src="assets/img/icons/done.svg" width="20px" height="20px" alt="Atendido">
+                        </button>
+                    </a>
+                    <a href="/archive-consult?id={{.ID}}">
+                        <button class="btn btn-danger">
+                            <img src="assets/img/icons/archive.svg" width="20px" height="20px" alt="Archivar">
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            {{end}}
         </tbody>
     </table>
 </div>

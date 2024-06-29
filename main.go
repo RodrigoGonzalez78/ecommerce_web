@@ -17,20 +17,29 @@ func main() {
 	assetsDir := http.Dir("assets")
 	http.Handle("/assets/", http.StripPrefix("/assets/", utils.FileOnlyHandler(assetsDir)))
 
-	http.HandleFunc("/", middleware.CheckJwt(routes.HomeHandler))
+	//Paginas estaticas
+	http.HandleFunc("/", middleware.CheckJwt(routes.HomePage))
 	http.HandleFunc("/termsanduses", middleware.CheckJwt(routes.Terminos))
 	http.HandleFunc("/about", middleware.CheckJwt(routes.About))
 
+	//Gestion de usuarios y autenticacion
 	http.HandleFunc("/login-page", middleware.CheckJwt(routes.LoginPage))
 	http.HandleFunc("/sign-up-page", middleware.CheckJwt(routes.SignUpPage))
 	http.HandleFunc("/logout", middleware.CheckJwt(routes.Logout))
+	http.HandleFunc("/user-list", middleware.CheckJwt(middleware.AdminCheck(routes.UserList)))
 
-	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
-
+	//Gestion de productos
 	http.HandleFunc("/products-page", middleware.CheckJwt(routes.ProductsPage))
 	http.HandleFunc("/new-product", middleware.CheckJwt(middleware.AdminCheck(routes.NewProduct)))
 	http.HandleFunc("/edit-product", middleware.CheckJwt(middleware.AdminCheck(routes.EditProduct)))
 	http.HandleFunc("/disabled-products", middleware.CheckJwt(middleware.AdminCheck(routes.DisabledProductsPage)))
+	http.HandleFunc("/disable-product", middleware.CheckJwt(middleware.AdminCheck(routes.DisableProduct)))
+	http.HandleFunc("/enable-product", middleware.CheckJwt(middleware.AdminCheck(routes.EnableProduct)))
+
+	//Gestion de contacto
+	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
+	http.HandleFunc("/consults-list", middleware.CheckJwt(middleware.AdminCheck(routes.ConsultList)))
+	http.HandleFunc("/archived-consults", middleware.CheckJwt(middleware.AdminCheck(routes.ArchivedConsult)))
 
 	log.Println("Servidor iniciado en el puerto 8080")
 	err := http.ListenAndServe(":8080", nil)
