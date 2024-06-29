@@ -27,6 +27,8 @@ func main() {
 	http.HandleFunc("/sign-up-page", middleware.CheckJwt(routes.SignUpPage))
 	http.HandleFunc("/logout", middleware.CheckJwt(routes.Logout))
 	http.HandleFunc("/user-list", middleware.CheckJwt(middleware.AdminCheck(routes.UserList)))
+	http.HandleFunc("/desactivate-user", middleware.CheckJwt(middleware.AdminCheck(routes.DeactivateUser)))
+	http.HandleFunc("/activate-user", middleware.CheckJwt(middleware.AdminCheck(routes.ActivateUser)))
 
 	//Gestion de productos
 	http.HandleFunc("/products-page", middleware.CheckJwt(routes.ProductsPage))
