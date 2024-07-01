@@ -44,6 +44,8 @@ func main() {
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
 	http.HandleFunc("/consults-list", middleware.CheckJwt(middleware.AdminCheck(routes.ConsultList)))
 	http.HandleFunc("/archived-consults", middleware.CheckJwt(middleware.AdminCheck(routes.ArchivedConsult)))
+	http.HandleFunc("/attended-consult", middleware.CheckJwt(middleware.AdminCheck(routes.AttendedConsult)))
+	http.HandleFunc("/archive-consult", middleware.CheckJwt(middleware.AdminCheck(routes.ArchiveConsult)))
 
 	log.Println("Servidor iniciado en el puerto 8080")
 	err := http.ListenAndServe(":8080", nil)
