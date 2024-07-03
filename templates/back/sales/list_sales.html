@@ -17,32 +17,30 @@
                 <th>Precio Total</th>
                 <th>Fecha</th>
                 <th>Factura</th>
-
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($sales as $sale) : ?>
+            {{ range .Sales }}
                 <tr>
-                    <td><?php echo $sale['id']; ?></td>
-                    <td><?php echo '$' . $sale['total_price']; ?></td>
-                    <td><?php echo $sale['date']; ?></td>
+                    <td>{{ .ID }}</td>
+                    <td>{{ printf "$%.2f" .TotalPrice }}</td>
+                    <td>{{ .Date }}</td>
                     <td>
-                        <a href="<?php echo base_url("/bill?id=" .$sale['id']) ?>">
+                        <a href="/bill?id={{ .ID }}">
                         <button class="btn my-btn-primary fw-bold">
                             <img src="assets/img/icons/receipt.svg" width="20px" height="20px" alt="Archivar">
                             Ver
                         </button>
                         </a>
-                        <a href="<?php echo base_url("//bill-dowload?id=".$sale['id']) ?>">
+                        <a href="/bill-download?id={{ .ID }}">
                         <button class="btn btn-danger fw-bold">
                             <img src="assets/img/icons/download.svg" width="20px" height="20px" alt="Archivar">
                             Descargar
                         </button>
                         </a>
-                       
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            {{ end }}
         </tbody>
     </table>
 </div>
