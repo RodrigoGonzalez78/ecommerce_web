@@ -52,7 +52,7 @@ CREATE TABLE sales (
 );
 
 -- Estructura de tabla para la tabla `salesdetails`
-CREATE TABLE salesdetails (
+CREATE TABLE sale_details (
   id SERIAL PRIMARY KEY,
   id_sale INT NOT NULL,
   count INT NOT NULL,

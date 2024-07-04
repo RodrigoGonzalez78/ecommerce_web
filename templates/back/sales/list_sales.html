@@ -22,9 +22,9 @@
         <tbody>
             {{ range .Sales }}
                 <tr>
-                    <td>{{ .ID }}</td>
-                    <td>{{ printf "$%.2f" .TotalPrice }}</td>
-                    <td>{{ .Date }}</td>
+                    <td>{{.ID}}</td>
+                    <td>{{.TotalPrice}}</td>
+                    <td>{{.Date.Format "02/01/2006"}}</td>
                     <td>
                         <a href="/bill?id={{ .ID }}">
                         <button class="btn my-btn-primary fw-bold">

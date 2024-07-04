@@ -4,11 +4,11 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/models"
 )
 
-func CreateSale(data models.Sale) error {
+func CreateSale(data models.Sale) (*models.Sale, error) {
 	if err := db.Create(&data).Error; err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return &data, nil
 }
 
 func FindSale(id uint) (*models.Sale, error) {
@@ -31,15 +31,14 @@ func AllSales() ([]map[string]interface{}, error) {
 	return results, nil
 }
 
-func UserSales(id uint) ([]map[string]interface{}, error) {
-	var results []map[string]interface{}
+func UserSales(id uint) ([]models.Sale, error) {
+	var sales []models.Sale
 	err := db.Table("sales").
-		Select("sales.*, users.name, users.last_name, users.email").
-		Joins("join users on users.id = sales.id_user").
-		Where("users.id = ?", id).
-		Scan(&results).Error
+		Select("id, id_user, total_price, date").
+		Where("id_user = ?", id).
+		Scan(&sales).Error
 	if err != nil {
 		return nil, err
 	}
-	return results, nil
+	return sales, nil
 }
