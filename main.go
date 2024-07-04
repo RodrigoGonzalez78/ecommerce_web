@@ -39,7 +39,11 @@ func main() {
 	http.HandleFunc("/disabled-products", middleware.CheckJwt(middleware.AdminCheck(routes.DisabledProductsPage)))
 	http.HandleFunc("/disable-product", middleware.CheckJwt(middleware.AdminCheck(routes.DisableProduct)))
 	http.HandleFunc("/enable-product", middleware.CheckJwt(middleware.AdminCheck(routes.EnableProduct)))
+
+	//Carrito y compra
+	http.HandleFunc("/add-to-cart", middleware.CheckJwt(routes.AddToCart))
 	http.HandleFunc("/my-orders", middleware.CheckJwt(routes.MyOrders))
+	http.HandleFunc("/my-cart", middleware.CheckJwt(routes.MyCart))
 
 	//Gestion de contacto
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))

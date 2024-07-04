@@ -30,7 +30,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, data map[string]interfac
 	contentTemplate, err := template.ParseFiles(tmpl)
 
 	if err != nil {
-		http.Error(w, "No se pudo cargar el archivo de contenido", http.StatusInternalServerError)
+		http.Error(w, "No se pudo cargar el archivo de contenido"+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
