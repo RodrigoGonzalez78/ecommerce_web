@@ -11,6 +11,7 @@ import (
 )
 
 type ProductCartItem struct {
+	ID         int
 	Name       string
 	Image      string
 	Amount     int
@@ -47,6 +48,7 @@ func MyCart(w http.ResponseWriter, r *http.Request) {
 		prod, _ := db.GetProduct(uint(v.ID))
 
 		products = append(products, ProductCartItem{
+			ID:         v.ID,
 			Name:       prod.Name,
 			Image:      prod.Image,
 			Amount:     v.Qty,

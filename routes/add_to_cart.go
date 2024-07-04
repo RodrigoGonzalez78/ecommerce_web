@@ -77,4 +77,6 @@ func AddToCart(w http.ResponseWriter, r *http.Request) {
 
 	// Añadir la cookie a la respuesta
 	http.SetCookie(w, cartCookie)
+
+	http.Redirect(w, r, "/products-page", http.StatusSeeOther)
 }

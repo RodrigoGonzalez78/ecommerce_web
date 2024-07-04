@@ -44,6 +44,10 @@ func main() {
 	http.HandleFunc("/add-to-cart", middleware.CheckJwt(routes.AddToCart))
 	http.HandleFunc("/my-orders", middleware.CheckJwt(routes.MyOrders))
 	http.HandleFunc("/my-cart", middleware.CheckJwt(routes.MyCart))
+	http.HandleFunc("/sum-cart-item", middleware.CheckJwt(routes.IncrementCartItem))
+	http.HandleFunc("/rest-cart-item", middleware.CheckJwt(routes.DecrementCartItem))
+	http.HandleFunc("/remove-from-cart", middleware.CheckJwt(routes.RemoveFromCart))
+	http.HandleFunc("/clear-cart", middleware.CheckJwt(routes.ClearCart))
 
 	//Gestion de contacto
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))

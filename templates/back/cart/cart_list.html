@@ -36,13 +36,13 @@
                                         <h5 class="mb-0">${{  .TotalPrice }}</h5>
                                     </div>
                                     <div class="col-md-1 col-lg-2 col-xl-2 d-flex">
-                                        <a class="px-1" href="/sum-cart-elemento">
+                                        <a class="px-1" href="/sum-cart-item?id={{.ID}}">
                                             <button class="btn my-btn-primary">+</button>
                                         </a>
-                                        <a href="/rest-cart-element">
+                                        <a href="/rest-cart-item?id={{.ID}}">
                                             <button class="btn btn-danger">-</button>
                                         </a>
-                                        <a class="px-1" href="/remove-cart-element">
+                                        <a class="px-1" href="/remove-from-cart?id={{.ID}}">
                                             <button class="btn btn-danger">
                                                 <img src="/assets/img/icons/delete.svg" width="20px" height="20px" alt="">
                                             </button>
