@@ -20,3 +20,5 @@ INSERT INTO categories (name) VALUES
 ('Refrigeración Líquida');
 
 
+INSERT INTO profile (descrition) VALUES ('Admin');
+INSERT INTO profile (descrition) VALUES ('Client');
