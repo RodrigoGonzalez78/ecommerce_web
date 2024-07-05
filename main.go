@@ -51,6 +51,8 @@ func main() {
 	http.HandleFunc("/complete-purchase", middleware.CheckJwt(routes.CompletePurchase))
 	http.HandleFunc("/all-orders", middleware.CheckJwt(routes.AllSalesList))
 
+	http.HandleFunc("/user-profile", middleware.CheckJwt(routes.UserProfilePage))
+
 	//Gestion de contacto
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
 	http.HandleFunc("/consults-list", middleware.CheckJwt(middleware.AdminCheck(routes.ConsultList)))

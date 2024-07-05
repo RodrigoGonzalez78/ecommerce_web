@@ -16,7 +16,7 @@ func UserList(w http.ResponseWriter, r *http.Request) {
 	data := map[string]interface{}{
 		"Titulo":    "Lista de Usuarios",
 		"IDProfile": userData.RolID,
-		"Users":     users,
+		"User":      users,
 		"Success":   false,
 		"Error":     false,
 	}

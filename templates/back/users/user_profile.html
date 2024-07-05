@@ -1,5 +1,4 @@
 
-
 <section class="container my-5">
     <div class="row justify-content-sm-center h-100">
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-12">
@@ -7,21 +6,18 @@
                 <div class="card-body p-5">
                     <h1 class="fs-4 card-title fw-bold mb-4 text-center">Mis Datos</h1>
 
-                    <form method="post" action="/update-user-data?id={{.userID}}">
+                    <form method="post" action="/update-user-data?id={{.User.ID}}">
                         <div class="mb-2">
                             <label for="name" class="form-label">Nombre</label>
-                            <input name="name" type="text" class="form-control" value="{{index .userData "name"}}" placeholder="Nombre">
-                            
+                            <input name="name" type="text" class="form-control" value="{{.User.Name}}" placeholder="Nombre">
                         </div>
                         <div class="mb-3">
                             <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" name="last_name" class="form-control" value="{{index .userData "last_name"}}" placeholder="Apellido">
-                            
+                            <input type="text" name="last_name" class="form-control" value="{{.User.LastName}}" placeholder="Apellido">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo electrónico</label>
-                            <input name="email" type="email" class="form-control" value="{{index .userData "email"}}" placeholder="correo@algo.com">
-                            
+                            <input name="email" type="email" class="form-control" value="{{.User.Email}}" placeholder="correo@algo.com">
                         </div>
                         <div class="d-flex align-items-center">
                             <input type="submit" value="Actualizar" class="btn my-btn-primary ms-auto fw-bold">
@@ -29,7 +25,7 @@
                     </form>
 
                     <h1 class="fs-4 card-title fw-bold mb-4 text-center">Cambiar Contraseña</h1>
-                    <form method="post" action="/update-password?id={{.userID}}">
+                    <form method="post" action="/update-password?id={{.User.ID}}">
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña</label>
                             <input name="password" type="password" class="form-control" placeholder="Contraseña (mínimo 8 caracteres)">
@@ -40,25 +36,22 @@
                     </form>
 
                     <h1 class="fs-4 card-title fw-bold mb-4 text-center">Mi Dirección</h1>
-                    <form method="post" action="/update-address?id={{.userID}}">
+                    <form method="post" action="/update-address?id={{.User.ID}}">
                         <div class="mb-3">
                             <label for="street" class="form-label">Calle</label>
-                            <input name="street" type="text" class="form-control" value="{{index .address "street"}}" placeholder="Calle">
-                           
+                            <input name="street" type="text" class="form-control" value="{{.Address.Street}}" placeholder="Calle">
                         </div>
                         <div class="mb-3">
                             <label for="postal_code" class="form-label">Código Postal</label>
-                            <input name="postal_code" type="text" class="form-control" value="{{index .address "postal_code"}}" placeholder="Código Postal">
-                            
+                            <input name="postal_code" type="text" class="form-control" value="{{.Address.PostalCode}}" placeholder="Código Postal">
                         </div>
                         <div class="mb-3">
                             <label for="neighborhood" class="form-label">Barrio</label>
-                            <input name="neighborhood" type="text" class="form-control" value="{{index .address "neighborhood"}}" placeholder="Barrio">
-                            
+                            <input name="neighborhood" type="text" class="form-control" value="{{.Address.Neighborhood}}" placeholder="Barrio">
                         </div>
                         <div class="mb-3">
                             <label for="city" class="form-label">Ciudad</label>
-                            <input name="city" type="text" class="form-control" value="{{index .address "city"}}" placeholder="Ciudad">
+                            <input name="city" type="text" class="form-control" value="{{.Address.City}}" placeholder="Ciudad">
                         </div>
                         <div class="d-flex align-items-center">
                             <input type="submit" value="Actualizar" class="btn my-btn-primary ms-auto fw-bold">
