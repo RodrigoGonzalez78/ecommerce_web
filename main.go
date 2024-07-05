@@ -49,6 +49,7 @@ func main() {
 	http.HandleFunc("/remove-from-cart", middleware.CheckJwt(routes.RemoveFromCart))
 	http.HandleFunc("/clear-cart", middleware.CheckJwt(routes.ClearCart))
 	http.HandleFunc("/complete-purchase", middleware.CheckJwt(routes.CompletePurchase))
+	http.HandleFunc("/all-orders", middleware.CheckJwt(routes.AllSalesList))
 
 	//Gestion de contacto
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))

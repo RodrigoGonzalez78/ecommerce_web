@@ -22,7 +22,7 @@ func FindSale(id uint) (*models.Sale, error) {
 func AllSales() ([]map[string]interface{}, error) {
 	var results []map[string]interface{}
 	err := db.Table("sales").
-		Select("sales.*, users.name, users.last_name, users.email").
+		Select("sales.*, users.name as user_name, users.last_name as last_name, users.email as email").
 		Joins("join users on users.id = sales.id_user").
 		Scan(&results).Error
 	if err != nil {
