@@ -1,5 +1,5 @@
 -- Estructura de tabla para la tabla `address`
-CREATE TABLE address (
+CREATE TABLE addresses (
   id SERIAL PRIMARY KEY,
   street TEXT NOT NULL,
   postal_code INT NOT NULL,
@@ -73,5 +73,5 @@ CREATE TABLE users (
   id_address INT,
   id_profile INT NOT NULL DEFAULT 2,
   FOREIGN KEY (id_profile) REFERENCES profile(id),
-  FOREIGN KEY (id_address) REFERENCES address(id)
+  FOREIGN KEY (id_address) REFERENCES addresses(id)
 );

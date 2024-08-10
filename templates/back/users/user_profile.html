@@ -42,7 +42,7 @@
             <div class="card shadow-lg">
                 <div class="card-body p-5">
                     <h1 class="fs-4 card-title fw-bold mb-4 text-center">Mi Dirección</h1>
-                    <form method="post" action="/update-address?id={{.User.ID}}">
+                    <form method="post" action="/change-address">
                         <div class="mb-3">
                             <label for="street" class="form-label">Calle</label>
                             <input name="street" type="text" class="form-control" value="{{.Address.Street}}" placeholder="Calle">

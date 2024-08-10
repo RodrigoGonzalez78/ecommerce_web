@@ -4,11 +4,14 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/models"
 )
 
-func CreateAddress(data models.Address) error {
-	if err := db.Create(&data).Error; err != nil {
-		return err
+func CreateAddress(data *models.Address) (uint, error) {
+	// Crea la dirección en la base de datos
+	if err := db.Create(data).Error; err != nil {
+		return 0, err
 	}
-	return nil
+
+	// Retorna el ID de la dirección creada
+	return data.ID, nil
 }
 
 func UpdateAddress(id uint, data map[string]interface{}) error {
