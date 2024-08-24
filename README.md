@@ -9,6 +9,11 @@ Un e-commerce enfocado al comercio de componentes de computadora. Este proyecto 
 
 ![Captura1](/adicionales/captura%201.png)
 ![Captura2](/adicionales/captura%202.png)
+![Captura3](/adicionales/captura%203.png)
+![Captura4](/adicionales/captura%204.png)
+![Captura5](/adicionales/captura%205.png)
+
+
 
 ## Informe
 
