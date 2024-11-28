@@ -17,14 +17,15 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == http.MethodPost {
-		// Recoge los datos del formulario
+
 		name := r.FormValue("name")
 		lastName := r.FormValue("last_name")
 		email := r.FormValue("email")
 		password := r.FormValue("password")
+		confirmPassword := r.FormValue("confirm_password")
 
-		// Mapa para almacenar los valores y los errores
 		data := map[string]interface{}{
+			"Titulo": "Registro",
 			"values": map[string]string{
 				"name":      name,
 				"last_name": lastName,
@@ -34,7 +35,6 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 			"error": map[string]string{},
 		}
 
-		// Validación de los datos del formulario
 		if name == "" {
 			data["error"].(map[string]string)["name"] = "El nombre es obligatorio"
 		}
@@ -53,20 +53,23 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 			data["error"].(map[string]string)["password"] = "La contraseña debe tener al menos 8 caracteres"
 		}
 
-		// Si hay errores, vuelve a mostrar el formulario con los errores
+		if confirmPassword == "" {
+			data["error"].(map[string]string)["confirm_password"] = "Debe repetir la contraseña"
+		} else if password != confirmPassword {
+			data["error"].(map[string]string)["confirm_password"] = "Las contraseñas no coinciden"
+		}
+
 		if len(data["error"].(map[string]string)) > 0 {
 			utils.RenderTemplate(w, "templates/back/users/sign_up.html", data)
 			return
 		}
 
-		// Encriptar la contraseña
 		hashedPassword, err := utils.HashPassword(password)
 		if err != nil {
 			http.Error(w, "Error al encriptar la contraseña", http.StatusInternalServerError)
 			return
 		}
 
-		// Aquí agregarías la lógica para registrar al usuario
 		err = db.CreateUser(&models.User{
 			Name:      name,
 			LastName:  lastName,
@@ -81,14 +84,12 @@ func SignUpPage(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Redirige al usuario a una página de éxito o inicio de sesión
 		http.Redirect(w, r, "/login-page", http.StatusSeeOther)
 		return
 	}
 
-	// Si el método no es POST, muestra el formulario vacío
 	data := map[string]interface{}{
-		"Titulo":    "Home",
+		"Titulo":    "Registro",
 		"IDProfile": userData.RolID,
 		"values": map[string]string{
 			"name":      "",
