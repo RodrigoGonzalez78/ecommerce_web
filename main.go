@@ -19,14 +19,14 @@ func main() {
 
 	//Paginas estaticas
 	http.HandleFunc("/", middleware.CheckJwt(routes.HomePage))
-	http.HandleFunc("/termsanduses", middleware.CheckJwt(routes.Terminos))
-	http.HandleFunc("/about", middleware.CheckJwt(routes.About))
+	http.HandleFunc("/termsanduses", middleware.CheckJwt(routes.TyCPage))
+	http.HandleFunc("/about", middleware.CheckJwt(routes.AboutPage))
 
 	//Gestion de usuarios y autenticacion
 	http.HandleFunc("/login-page", middleware.CheckJwt(routes.LoginPage))
 	http.HandleFunc("/sign-up-page", middleware.CheckJwt(routes.SignUpPage))
 	http.HandleFunc("/logout", middleware.CheckJwt(routes.Logout))
-	http.HandleFunc("/user-list", middleware.CheckJwt(middleware.AdminCheck(routes.UserList)))
+	http.HandleFunc("/user-list", middleware.CheckJwt(middleware.AdminCheck(routes.UserListPage)))
 	http.HandleFunc("/desactivate-user", middleware.CheckJwt(middleware.AdminCheck(routes.DeactivateUser)))
 	http.HandleFunc("/activate-user", middleware.CheckJwt(middleware.AdminCheck(routes.ActivateUser)))
 	http.HandleFunc("/reset-password", middleware.CheckJwt(middleware.AdminCheck(routes.ResetPassword)))
