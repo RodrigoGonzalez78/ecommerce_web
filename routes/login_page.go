@@ -19,16 +19,19 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 
 	data := map[string]interface{}{
-		"Titulo":    "Home",
+		"Titulo":    "Inicia Sesión",
 		"IDProfile": userData.RolID,
+		"Error":     "", // Añadimos un campo para el mensaje de error
 	}
 
+	// Redirigir si el usuario ya está autenticado
 	if userData.RolID != 0 {
 		http.Redirect(w, r, "/home-page", http.StatusSeeOther)
+		return
 	}
 
+	// Si el método no es POST, se renderiza la página de login
 	if r.Method != http.MethodPost {
-
 		utils.RenderTemplate(w, "templates/back/users/login.html", data)
 		return
 	}
@@ -36,32 +39,37 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	password := r.FormValue("password")
 
+	// Validación de entrada
 	if email == "" || password == "" {
-		http.Error(w, errInvalidCredentials, http.StatusUnauthorized)
+		data["Error"] = errInvalidCredentials // Agregar el error a los datos
+		utils.RenderTemplate(w, "templates/back/users/login.html", data)
 		return
 	}
 
+	// Verificar si el usuario existe
 	exists, user, err := db.CheckExistUser(email)
-
 	if err != nil {
-		http.Error(w, "Error en el servidor", http.StatusInternalServerError)
+		data["Error"] = "Error en el servidor" // Error del servidor
+		utils.RenderTemplate(w, "templates/back/users/login.html", data)
 		return
 	}
 
 	if !exists || !utils.CheckPasswordHash(password, user.Password) {
-		http.Error(w, errInvalidCredentials, http.StatusUnauthorized)
+		data["Error"] = errInvalidCredentials // Error de credenciales inválidas
+		utils.RenderTemplate(w, "templates/back/users/login.html", data)
 		return
 	}
 
+	// Generar token
 	tokenString, err := utils.CreateToken(user)
-
 	if err != nil {
-		http.Error(w, errGeneratingToken, http.StatusInternalServerError)
+		data["Error"] = errGeneratingToken // Error generando el token
+		utils.RenderTemplate(w, "templates/back/users/login.html", data)
 		return
 	}
 
+	// Establecer cookie
 	expiration := time.Now().Add(365 * 24 * time.Hour)
-
 	http.SetCookie(w, &http.Cookie{
 		Name:     "token",
 		Value:    tokenString,
@@ -69,5 +77,6 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 	})
 
+	// Redirigir al home page
 	http.Redirect(w, r, "/home-page", http.StatusSeeOther)
 }
