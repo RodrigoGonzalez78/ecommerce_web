@@ -23,3 +23,12 @@ func GetSaleDetailsByIdAndProductName(id uint) ([]map[string]interface{}, error)
 	}
 	return results, nil
 }
+
+func GetSaleDetailsBySaleID(saleID uint) ([]models.SaleDetails, error) {
+	var saleDetails []models.SaleDetails
+	err := db.Where("id_sale = ?", saleID).Find(&saleDetails).Error
+	if err != nil {
+		return nil, err
+	}
+	return saleDetails, nil
+}
