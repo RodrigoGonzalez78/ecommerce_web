@@ -44,3 +44,23 @@ func GetAllUsers() ([]models.User, error) {
 	result := db.Find(&users)
 	return users, result.Error
 }
+func GetPaginatedUsers(page, pageSize int) ([]models.User, int64, error) {
+	var users []models.User
+	var totalUsers int64
+
+	// Calcular el offset (desplazamiento)
+	offset := (page - 1) * pageSize
+
+	// Contar el total de usuarios
+	if err := db.Model(&models.User{}).Count(&totalUsers).Error; err != nil {
+		return nil, 0, err
+	}
+
+	// Obtener los usuarios con paginación
+	result := db.Limit(pageSize).Offset(offset).Find(&users)
+	if result.Error != nil {
+		return nil, 0, result.Error
+	}
+
+	return users, totalUsers, nil
+}
