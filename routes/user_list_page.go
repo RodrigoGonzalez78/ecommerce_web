@@ -8,7 +8,7 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
-func UserList(w http.ResponseWriter, r *http.Request) {
+func UserListPage(w http.ResponseWriter, r *http.Request) {
 
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 	users, _ := db.GetAllUsers()
@@ -16,9 +16,10 @@ func UserList(w http.ResponseWriter, r *http.Request) {
 	data := map[string]interface{}{
 		"Titulo":    "Lista de Usuarios",
 		"IDProfile": userData.RolID,
-		"User":      users,
+		"Users":     users,
 		"Success":   false,
 		"Error":     false,
 	}
+
 	utils.RenderTemplate(w, "templates/back/users/user_list.html", data)
 }

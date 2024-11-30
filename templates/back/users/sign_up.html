@@ -7,7 +7,8 @@
                     <form method="post" action="/sign-up-page">
                         <div class="mb-2">
                             <label for="name" class="form-label">Nombre</label>
-                            <input name="name" type="text" class="form-control" value="{{index .values "name"}}" placeholder="Nombre">
+                            <input name="name" type="text" class="form-control" value="{{index .values "name"}}"
+                                placeholder="Nombre">
                             {{ if index .error "name" }}
                             <div class='alert alert-danger mt-2'>
                                 {{index .error "name"}}
@@ -16,7 +17,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="last_name" class="form-label">Apellido</label>
-                            <input type="text" name="last_name" class="form-control" value="{{index .values "last_name"}}" placeholder="Apellido">
+                            <input type="text" name="last_name" class="form-control" value="{{index .values "last_name"}}"
+                                placeholder="Apellido">
                             {{ if index .error "last_name" }}
                             <div class='alert alert-danger mt-2'>
                                 {{index .error "last_name"}}
@@ -25,7 +27,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo electrónico</label>
-                            <input name="email" type="email" class="form-control" value="{{index .values "email"}}" placeholder="correo@algo.com">
+                            <input name="email" type="email" class="form-control" value="{{index .values "email"}}"
+                                placeholder="correo@algo.com">
                             {{ if index .error "email" }}
                             <div class='alert alert-danger mt-2'>
                                 {{index .error "email"}}
@@ -34,16 +37,26 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input name="password" type="password" class="form-control" placeholder="Contraseña (mínimo 8 caracteres)">
+                            <input name="password" type="password" class="form-control"
+                                placeholder="Contraseña (mínimo 8 caracteres)">
                             {{ if index .error "password" }}
                             <div class='alert alert-danger mt-2'>
                                 {{index .error "password"}}
                             </div>
                             {{ end }}
                         </div>
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Repetir Contraseña</label>
+                            <input name="confirm_password" type="password" class="form-control"
+                                placeholder="Repite la contraseña">
+                            {{ if index .error "confirm_password" }}
+                            <div class='alert alert-danger mt-2'>
+                                {{index .error "confirm_password"}}
+                            </div>
+                            {{ end }}
+                        </div>
                         <div class="d-flex align-items-center">
-                            <input type="reset" value="Cancelar" class="btn btn-danger fw-bold">
-                            <input type="submit" value="Guardar" class="btn my-btn-primary ms-auto fw-bold">
+                            <input type="submit" value="Registrarse" class="btn my-btn-primary w-100 fw-bold">
                         </div>
                     </form>
                 </div>

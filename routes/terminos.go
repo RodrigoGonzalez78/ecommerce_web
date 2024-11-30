@@ -7,11 +7,11 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
-func Terminos(w http.ResponseWriter, r *http.Request) {
+func TyCPage(w http.ResponseWriter, r *http.Request) {
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 
 	data := map[string]interface{}{
-		"Titulo":    "Home",
+		"Titulo":    "Terminos y Condiciones",
 		"IDProfile": userData.RolID,
 		"Success":   false,
 		"Error":     false,

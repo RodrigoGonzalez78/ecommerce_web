@@ -18,6 +18,70 @@
                 <td></td>
                 <th></th>
             </tr>
+
+            <div class="container m-4">
+                <h4>Lista de usuarios</h4>
+            </div>
+            
+            <div class="container ms-auto">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Desactivado</th>
+                            <th>Admin</th>
+                            <th>Contraseña</th>
+                            <td></td>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Users}}
+                        <tr>
+                            <td>{{.ID}}</td>
+                            <td>{{.Name}}</td>
+                            <td>{{.LastName}}</td>
+                            <td>{{.Email}}</td>
+                            <td>{{.Down}}</td>
+                            <td>{{if eq .IDProfile 1}}SI{{else}}NO{{end}}</td>
+                            <td>
+                                <a href="/reset-password?id={{.ID}}">
+                                    <button class="btn btn-danger">
+                                        <img src="assets/img/icons/restart.svg" alt="" height="25px" width="25px">
+                                        Blanquear
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                {{if eq .Down "SI"}}
+                                    <a href="/activate-user?id={{.ID}}">
+                                        <button class="btn my-btn-primary">
+                                            Activar
+                                        </button>
+                                    </a>
+                                {{else}}
+                                    <a href="/desactivate-user?id={{.ID}}">
+                                        <button class="btn btn-danger">
+                                            Desactivar
+                                        </button>
+                                    </a>
+                                {{end}}
+                            </td>
+                            <td>
+                                <a href="/edit-user?id={{.ID}}">
+                                    <button class="btn my-btn-primary">
+                                        <img src="assets/img/icons/edit.svg" alt="" height="25px" width="25px">
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
         </thead>
         <tbody>
             {{range .Users}}
