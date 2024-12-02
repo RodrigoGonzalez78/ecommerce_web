@@ -19,7 +19,7 @@ type ProductCartItem struct {
 	TotalPrice float64
 }
 
-func MyCart(w http.ResponseWriter, r *http.Request) {
+func MyCartPage(w http.ResponseWriter, r *http.Request) {
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 
 	cartCookie, err := r.Cookie("cart")

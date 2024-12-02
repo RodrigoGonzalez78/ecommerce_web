@@ -45,8 +45,8 @@ func main() {
 
 	//Carrito y compra
 	http.HandleFunc("/add-to-cart", middleware.CheckJwt(routes.AddToCart))
-	http.HandleFunc("/my-orders", middleware.CheckJwt(routes.MyOrders))
-	http.HandleFunc("/my-cart", middleware.CheckJwt(routes.MyCart))
+	http.HandleFunc("/my-orders", middleware.CheckJwt(routes.MyOrdersPage))
+	http.HandleFunc("/my-cart", middleware.CheckJwt(routes.MyCartPage))
 	http.HandleFunc("/sum-cart-item", middleware.CheckJwt(routes.IncrementCartItem))
 	http.HandleFunc("/rest-cart-item", middleware.CheckJwt(routes.DecrementCartItem))
 	http.HandleFunc("/remove-from-cart", middleware.CheckJwt(routes.RemoveFromCart))
@@ -60,7 +60,7 @@ func main() {
 	//Gestion de contacto
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
 	http.HandleFunc("/consults-list", middleware.CheckJwt(middleware.AdminCheck(routes.ConsultList)))
-	http.HandleFunc("/archived-consults", middleware.CheckJwt(middleware.AdminCheck(routes.ArchivedConsult)))
+	http.HandleFunc("/archived-consults", middleware.CheckJwt(middleware.AdminCheck(routes.ArchivedConsultPage)))
 	http.HandleFunc("/attended-consult", middleware.CheckJwt(middleware.AdminCheck(routes.AttendedConsult)))
 	http.HandleFunc("/archive-consult", middleware.CheckJwt(middleware.AdminCheck(routes.ArchiveConsult)))
 

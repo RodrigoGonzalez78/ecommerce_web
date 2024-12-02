@@ -2,33 +2,22 @@
 <div class="row m-2">
     <div class="col-3">
         <form method="post" action="/filter-products" enctype="multipart/form-data">
-            <div class="col mb-2">
-                <label for="search" class="form-label">Buscar</label>
-                <input name="search" type="text" class="form-control" placeholder="Palabra" value="{{.Search}}">
-                {{if .Errors.Search}}
-                    <div class='alert alert-danger mt-2'>
-                        {{.Errors.Search}}
-                    </div>
-                {{end}}
-            </div>
-            <div class="col input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="id_categorie">Categoria</label>
-                </div>
-                <select class="custom-select" name="id_categorie">
-                    <option selected>Todos</option>
-                    {{range .Categories}}
-                        <option value="{{.ID}}">{{.Name}}</option>
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <label for="search" class="form-label visually-hidden">Buscar</label>
+                    <input name="search" id="search" type="text" class="form-control" placeholder="Palabra" value="{{.Search}}">
+                    {{if .Errors.Search}}
+                        <div class='alert alert-danger mt-2'>
+                            {{.Errors.Search}}
+                        </div>
                     {{end}}
-                </select>
-                {{if .Errors.IDCategorie}}
-                    <div class='alert alert-danger mt-2'>
-                        {{.Errors.IDCategorie}}
-                    </div>
-                {{end}}
-            </div>
-            <div class="col">
-                <input type="submit" value="Filtrar" class="btn fw-bold my-btn-primary ms-auto">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn fw-bold my-btn-primary d-flex align-items-center">
+                        <img src="/assets/img/icons/search.svg" alt="Buscar" class="me-1" style="width: 16px; height: 16px;">
+                        Buscar
+                    </button>
+                </div>
             </div>
         </form>
     </div>

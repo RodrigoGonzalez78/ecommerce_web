@@ -10,7 +10,6 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/models"
 )
 
-// Handler para eliminar un producto del carrito
 func RemoveFromCart(w http.ResponseWriter, r *http.Request) {
 	idStr := r.URL.Query().Get("id")
 	id, err := strconv.Atoi(idStr)
@@ -19,7 +18,6 @@ func RemoveFromCart(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Leer la cookie del carrito
 	cartCookie, err := r.Cookie("cart")
 	if err != nil {
 		http.Error(w, "Carrito no encontrado", http.StatusNotFound)
@@ -39,7 +37,6 @@ func RemoveFromCart(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Eliminar el producto del carrito
 	newCart := []models.CartItem{}
 	for _, item := range cart {
 		if item.ID != id {
@@ -47,17 +44,14 @@ func RemoveFromCart(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Serializar el carrito a JSON
 	cartBytes, err = json.Marshal(newCart)
 	if err != nil {
 		http.Error(w, "Error al serializar el carrito", http.StatusInternalServerError)
 		return
 	}
 
-	// Codificar el carrito en base64
 	cartValue := base64.URLEncoding.EncodeToString(cartBytes)
 
-	// Crear la cookie con duración de 24 horas
 	expiration := time.Now().Add(24 * time.Hour)
 	cartCookie = &http.Cookie{
 		Name:     "cart",
@@ -66,7 +60,6 @@ func RemoveFromCart(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 	}
 
-	// Añadir la cookie a la respuesta
 	http.SetCookie(w, cartCookie)
 
 	http.Redirect(w, r, "/my-cart", http.StatusSeeOther)

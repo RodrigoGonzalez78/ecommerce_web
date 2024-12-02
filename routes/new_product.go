@@ -15,24 +15,23 @@ import (
 )
 
 func NewProduct(w http.ResponseWriter, r *http.Request) {
+	userData, _ := r.Context().Value("userData").(*models.Claim)
 	categoriesList, _ := db.GetCategories()
 
 	if r.Method == http.MethodPost {
-		// Collect form data
+
 		name := r.FormValue("name")
 		price, _ := strconv.ParseFloat(r.FormValue("price"), 64)
 		stock, _ := strconv.Atoi(r.FormValue("stock"))
 		categoryID, _ := strconv.Atoi(r.FormValue("id_categorie"))
 		description := r.FormValue("description")
 
-		// Handle file upload
 		file, handler, err := r.FormFile("image")
 		if err != nil {
 			fmt.Println("Error uploading file:", err)
 		}
 		defer file.Close()
 
-		// Generate a random filename with the same extension
 		extension := filepath.Ext(handler.Filename)
 		randomFileName := uuid.New().String() + extension
 
@@ -54,7 +53,6 @@ func NewProduct(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Map to store values and errors
 		data := map[string]interface{}{
 			"values": map[string]string{
 				"name":         name,
@@ -66,9 +64,10 @@ func NewProduct(w http.ResponseWriter, r *http.Request) {
 			},
 			"errors":     map[string]string{},
 			"Categories": categoriesList,
+			"IDProfile":  userData.RolID,
+			"Titulo":     "Nuevo Producto",
 		}
 
-		// Form validation
 		if name == "" {
 			data["errors"].(map[string]string)["name"] = "El nombre es obligatorio"
 		}
@@ -88,13 +87,11 @@ func NewProduct(w http.ResponseWriter, r *http.Request) {
 			data["errors"].(map[string]string)["image"] = "La imagen es requerida"
 		}
 
-		// If there are errors, re-render the form with errors
 		if len(data["errors"].(map[string]string)) > 0 {
 			utils.RenderTemplate(w, "templates/back/products/new_product.html", data)
 			return
 		}
 
-		// Save the product to the database
 		product := models.Product{
 			Name:        name,
 			Price:       price,
@@ -111,12 +108,10 @@ func NewProduct(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Redirect to a success page or list of products
 		http.Redirect(w, r, "/products", http.StatusSeeOther)
 		return
 	}
 
-	// If the method is not POST, render the form
 	data := map[string]interface{}{
 		"Categories": categoriesList,
 		"values": map[string]string{
@@ -127,7 +122,9 @@ func NewProduct(w http.ResponseWriter, r *http.Request) {
 			"description":  "",
 			"image":        "",
 		},
-		"errors": map[string]string{},
+		"errors":    map[string]string{},
+		"IDProfile": userData.RolID,
+		"Titulo":    "Nuevo Producto",
 	}
 
 	utils.RenderTemplate(w, "templates/back/products/new_product.html", data)

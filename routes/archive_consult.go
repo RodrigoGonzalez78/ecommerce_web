@@ -22,7 +22,7 @@ func ArchiveConsult(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := db.UpdateConsult(uint(id), data); err != nil {
-		http.Error(w, "Error al archuvar   la consulta: "+err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error al archivar   la consulta: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 

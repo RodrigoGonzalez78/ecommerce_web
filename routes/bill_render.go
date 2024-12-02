@@ -58,7 +58,7 @@ func BillRender(w http.ResponseWriter, r *http.Request) {
 		"Sale":        *sale,
 		"User":        *user,
 		"Address":     *address,
-		"SaleDetails": saleDetails,
+		"SaleDetails": saleDetails[1],
 	}
 
 	// Renderizar la plantilla

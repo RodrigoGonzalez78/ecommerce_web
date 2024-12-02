@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/RodrigoGonzalez78/ecommerce_web/db"
@@ -9,17 +8,17 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
-func MyOrders(w http.ResponseWriter, r *http.Request) {
+func ArchivedConsultPage(w http.ResponseWriter, r *http.Request) {
 
 	userData, _ := r.Context().Value("userData").(*models.Claim)
+	consults, _ := db.GetAllArchivedConsults()
 
-	sales, _ := db.UserSales(userData.ID)
-	fmt.Println(sales)
 	data := map[string]interface{}{
-		"Titulo":    "Mis Pedidos",
+		"Titulo":    "Lista de consultas",
 		"IDProfile": userData.RolID,
-		"Sales":     sales,
+		"Consults":  consults,
+		"Success":   false,
+		"Error":     false,
 	}
-
-	utils.RenderTemplate(w, "templates/back/sales/list_sales.html", data)
+	utils.RenderTemplate(w, "templates/back/consults/consult_list.html", data)
 }
