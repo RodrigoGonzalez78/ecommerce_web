@@ -19,7 +19,7 @@ type SaleWithUser struct {
 	Email      string    `json:"email"`
 }
 
-func AllSalesList(w http.ResponseWriter, r *http.Request) {
+func AllSalesListPage(w http.ResponseWriter, r *http.Request) {
 
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 

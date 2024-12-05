@@ -22,17 +22,19 @@ func main() {
 	http.HandleFunc("/termsanduses", middleware.CheckJwt(routes.TyCPage))
 	http.HandleFunc("/about", middleware.CheckJwt(routes.AboutPage))
 
-	//Gestion de usuarios y autenticacion
+	//Autenticacion
 	http.HandleFunc("/login-page", middleware.CheckJwt(routes.LoginPage))
 	http.HandleFunc("/sign-up-page", middleware.CheckJwt(routes.SignUpPage))
 	http.HandleFunc("/logout", middleware.CheckJwt(routes.Logout))
+
+	//Gestion de informacion de usuarios
+	http.HandleFunc("/user-profile", middleware.CheckJwt(routes.UserProfilePage))
 	http.HandleFunc("/user-list", middleware.CheckJwt(middleware.AdminCheck(routes.UserListPage)))
 	http.HandleFunc("/desactivate-user", middleware.CheckJwt(middleware.AdminCheck(routes.DeactivateUser)))
 	http.HandleFunc("/activate-user", middleware.CheckJwt(middleware.AdminCheck(routes.ActivateUser)))
 	http.HandleFunc("/reset-password", middleware.CheckJwt(middleware.AdminCheck(routes.ResetPassword)))
 	http.HandleFunc("/edit-user", middleware.CheckJwt(middleware.AdminCheck(routes.EditUser)))
 	http.HandleFunc("/update-password", middleware.CheckJwt(routes.UpdatePassword))
-
 	http.HandleFunc("/change-address", middleware.CheckJwt(routes.ChangeAddress))
 
 	//Gestion de productos
@@ -52,10 +54,8 @@ func main() {
 	http.HandleFunc("/remove-from-cart", middleware.CheckJwt(routes.RemoveFromCart))
 	http.HandleFunc("/clear-cart", middleware.CheckJwt(routes.ClearCart))
 	http.HandleFunc("/complete-purchase", middleware.CheckJwt(routes.CompletePurchase))
-	http.HandleFunc("/all-orders", middleware.CheckJwt(routes.AllSalesList))
+	http.HandleFunc("/all-orders", middleware.CheckJwt(routes.AllSalesListPage))
 	http.HandleFunc("/bill", routes.BillRender)
-
-	http.HandleFunc("/user-profile", middleware.CheckJwt(routes.UserProfilePage))
 
 	//Gestion de contacto
 	http.HandleFunc("/contact-me-page", middleware.CheckJwt(routes.ContactMePage))
@@ -70,4 +70,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error al iniciar el servidor: %v", err)
 	}
+
 }

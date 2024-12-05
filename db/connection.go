@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var DSN = "user=admin password=storepasword dbname=store host=localhost port=5432 sslmode=disable"
+var DSN = "user=usuario password=12345678 dbname=ecommerce host=localhost port=5432 sslmode=disable"
 
 // Conexion de a la base de datos
 var db *gorm.DB
