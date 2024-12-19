@@ -61,3 +61,28 @@ func CreateProduct(data models.Product) error {
 	}
 	return nil
 }
+
+func GetPaginatedProducts(search string, page, itemsPerPage int) ([]models.Product, int64, error) {
+	var products []models.Product
+	var totalProducts int64
+
+	offset := (page - 1) * itemsPerPage
+
+	// Construir consulta
+	query := db.Model(&models.Product{}).Where("down = ?", "NO")
+	if search != "" {
+		query = query.Where("name ILIKE ?", "%"+search+"%")
+	}
+
+	// Contar productos totales
+	if err := query.Count(&totalProducts).Error; err != nil {
+		return nil, 0, err
+	}
+
+	// Obtener productos con paginación
+	if err := query.Offset(offset).Limit(itemsPerPage).Find(&products).Error; err != nil {
+		return nil, 0, err
+	}
+
+	return products, totalProducts, nil
+}

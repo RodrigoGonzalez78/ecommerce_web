@@ -38,7 +38,7 @@ func main() {
 	http.HandleFunc("/change-address", middleware.CheckJwt(routes.ChangeAddress))
 
 	//Gestion de productos
-	http.HandleFunc("/products-page", middleware.CheckJwt(routes.ProductsPage))
+	http.HandleFunc("/products", middleware.CheckJwt(routes.ProductsPage))
 	http.HandleFunc("/new-product", middleware.CheckJwt(middleware.AdminCheck(routes.NewProduct)))
 	http.HandleFunc("/edit-product", middleware.CheckJwt(middleware.AdminCheck(routes.EditProduct)))
 	http.HandleFunc("/disabled-products", middleware.CheckJwt(middleware.AdminCheck(routes.DisabledProductsPage)))

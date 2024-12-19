@@ -1,29 +1,26 @@
-
 <div class="row m-2">
     <div class="col-3">
-        <form method="post" action="/filter-products" enctype="multipart/form-data">
+        <form method="get" action="/products">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <label for="search" class="form-label visually-hidden">Buscar</label>
-                    <input name="search" id="search" type="text" class="form-control" placeholder="Palabra" value="{{.Search}}">
-                    {{if .Errors.Search}}
-                        <div class='alert alert-danger mt-2'>
-                            {{.Errors.Search}}
-                        </div>
-                    {{end}}
+                    <input name="search" id="search" type="text" class="form-control" placeholder="Palabra"
+                        value="{{.Search}}">
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn fw-bold my-btn-primary d-flex align-items-center">
-                        <img src="/assets/img/icons/search.svg" alt="Buscar" class="me-1" style="width: 16px; height: 16px;">
+                        <img src="/assets/img/icons/search.svg" alt="Buscar" class="me-1"
+                            style="width: 16px; height: 16px;">
                         Buscar
                     </button>
                 </div>
             </div>
         </form>
     </div>
-    {{if  eq .IDProfile 1 }}
+    {{if eq .IDProfile 1 }}
     <div class="col-auto ms-auto">
-        <a href="/new-product" class="text-dark"><button type="button" class="btn my-btn-primary fw-bold">Agregar</button></a>
+        <a href="/new-product" class="text-dark"><button type="button"
+                class="btn my-btn-primary fw-bold">Agregar</button></a>
     </div>
     <div class="col-auto">
         <a href="/disabled-products"><button type="button" class="btn my-btn-primary fw-bold">Inactivos</button></a>
@@ -43,44 +40,49 @@
             </div>
             <div class="container card-footer">
                 <div class="row">
-                    
+
                     {{if eq $.IDProfile 1}}
-                    
-                        <div class="col-6">
-                            <a href="/edit-product?id={{.ID}}"><button type="button" class="btn my-btn-primary">Editar</button></a>
-                        </div>
-                        {{if eq .Down "SI"}}
-                            <div class="col-6">
-                                <a href="/enable-product?id={{.ID}}"><button type="button" class="btn btn-danger">Activar</button></a>
-                            </div>
-                        {{else}}
-                            <div class="col-6">
-                                <a href="/disable-product?id={{.ID}}"><button type="button" class="btn btn-danger">Desactivar</button></a>
-                            </div>
-                        {{end}}
-                   
+
+                    <div class="col-6">
+                        <a href="/edit-product?id={{.ID}}"><button type="button"
+                                class="btn my-btn-primary">Editar</button></a>
+                    </div>
+                    {{if eq .Down "SI"}}
+                    <div class="col-6">
+                        <a href="/enable-product?id={{.ID}}"><button type="button"
+                                class="btn btn-danger">Activar</button></a>
+                    </div>
                     {{else}}
-                   
-                        <div class="col-6">
-                            <button type="button" class="btn my-btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{.ID}}">Ampliar</button>
-                        </div>
-                        {{if le .Stock 0}}
-                            <div class="col-6">
-                                <button type="button" class="btn btn-secondary">Comprar</button>
-                            </div>
-                        {{else}}
-                            <div class="col-6">
-                                <a href="/add-to-cart?id={{.ID}}"><button type="button" class="btn btn-danger">Comprar</button></a>
-                            </div>
-                        {{end}}
-                        
+                    <div class="col-6">
+                        <a href="/disable-product?id={{.ID}}"><button type="button"
+                                class="btn btn-danger">Desactivar</button></a>
+                    </div>
                     {{end}}
-                    
+
+                    {{else}}
+
+                    <div class="col-6">
+                        <button type="button" class="btn my-btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modal{{.ID}}">Ampliar</button>
+                    </div>
+                    {{if le .Stock 0}}
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary">Comprar</button>
+                    </div>
+                    {{else}}
+                    <div class="col-6">
+                        <a href="/add-to-cart?id={{.ID}}"><button type="button"
+                                class="btn btn-danger">Comprar</button></a>
+                    </div>
+                    {{end}}
+
+                    {{end}}
+
                 </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Modal -->
     <div class="modal fade" id="modal{{.ID}}" tabindex="-1" aria-labelledby="modalLabel{{.ID}}" aria-hidden="true">
         <div class="modal-dialog">
@@ -94,9 +96,11 @@
                     <h3>Tipos de entregas</h3>
                     <p>Los tiempos de entregas van normalmente de 2 a 5 días.</p>
                     <h3>Formas de envío</h3>
-                    <p>Los envíos se realizan a través de nuestra compañía de envíos asociada. Los precios y tiempos de entrega pueden variar dependiendo de la dirección de entrega.</p>
+                    <p>Los envíos se realizan a través de nuestra compañía de envíos asociada. Los precios y tiempos de
+                        entrega pueden variar dependiendo de la dirección de entrega.</p>
                     <h3>Formas de pago</h3>
-                    <p>Aceptamos tarjetas de débito y crédito, así como también Mercado Pago. Puedes realizar tu compra de forma segura y cómoda utilizando cualquiera de estos métodos de pago.</p>
+                    <p>Aceptamos tarjetas de débito y crédito, así como también Mercado Pago. Puedes realizar tu compra
+                        de forma segura y cómoda utilizando cualquiera de estos métodos de pago.</p>
                     <h5 class="fw-bold">Precio: <span class="my-text-color">{{.Price}}</span></h5>
                     <h5 class="fw-bold">Stock: <span class="my-text-color">{{.Stock}}</span></h5>
                 </div>
@@ -109,4 +113,25 @@
     </div>
     {{end}}
 </div>
+
+<!-- Paginación -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        {{if gt .CurrentPage 1}}
+        <li class="page-item">
+            <a class="page-link" href="/products?search={{.Search}}&page={{.Antpage}}">Anterior</a>
+        </li>
+        {{end}}
+        {{range .Pages }}
+        <li class="page-item {{if eq . .CurrentPage}}active{{end}}">
+            <a class="page-link" href="/products?search={{$.Search}}&page={{.}}">{{ .}}</a>
+        </li>
+        {{end}}
+        {{if lt .CurrentPage .TotalPages}}
+        <li class="page-item">
+            <a class="page-link" href="/products?search={{.Search}}&page={{.NextPage}}">Siguiente</a>
+        </li>
+        {{end}}
+    </ul>
+</nav>
 </body>
