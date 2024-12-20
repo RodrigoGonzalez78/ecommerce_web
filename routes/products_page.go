@@ -9,14 +9,6 @@ import (
 	"github.com/RodrigoGonzalez78/ecommerce_web/utils"
 )
 
-func seq(start, end int) []int {
-	s := make([]int, end-start+1)
-	for i := range s {
-		s[i] = start + i
-	}
-	return s
-}
-
 func ProductsPage(w http.ResponseWriter, r *http.Request) {
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 
@@ -28,7 +20,7 @@ func ProductsPage(w http.ResponseWriter, r *http.Request) {
 		page, _ = strconv.Atoi(pageParam)
 	}
 
-	itemsPerPage := 10
+	itemsPerPage := 2
 
 	products, totalProducts, err := db.GetPaginatedProducts(search, page, itemsPerPage)
 	if err != nil {
@@ -37,8 +29,6 @@ func ProductsPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	totalPages := int((totalProducts + int64(itemsPerPage) - 1) / int64(itemsPerPage))
-
-	pages := seq(1, totalPages)
 
 	data := map[string]interface{}{
 		"Titulo":      "Products",
@@ -51,7 +41,6 @@ func ProductsPage(w http.ResponseWriter, r *http.Request) {
 		"Error":       false,
 		"NextPage":    page + 1,
 		"Antpage":     page - 1,
-		"Pages":       pages,
 	}
 
 	utils.RenderTemplate(w, "templates/back/products/products.html", data)

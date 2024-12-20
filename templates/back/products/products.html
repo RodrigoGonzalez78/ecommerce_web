@@ -119,17 +119,12 @@
     <ul class="pagination justify-content-center">
         {{if gt .CurrentPage 1}}
         <li class="page-item">
-            <a class="page-link" href="/products?search={{.Search}}&page={{.Antpage}}">Anterior</a>
-        </li>
-        {{end}}
-        {{range .Pages }}
-        <li class="page-item {{if eq . .CurrentPage}}active{{end}}">
-            <a class="page-link" href="/products?search={{$.Search}}&page={{.}}">{{ .}}</a>
+            <a class="page-link " style="color: var(--color-primario); font-weight: bold;" href="/products?search={{.Search}}&page={{.Antpage}}">Pagina Anterior</a>
         </li>
         {{end}}
         {{if lt .CurrentPage .TotalPages}}
         <li class="page-item">
-            <a class="page-link" href="/products?search={{.Search}}&page={{.NextPage}}">Siguiente</a>
+            <a class="page-link" style="color: var(--color-primario); font-weight: bold;" href="/products?search={{.Search}}&page={{.NextPage}}">Pagina Siguiente</a>
         </li>
         {{end}}
     </ul>
