@@ -13,7 +13,7 @@ func AdminCheck(next http.HandlerFunc) http.HandlerFunc {
 		if userData.RolID != 1 {
 			http.Redirect(w, r, "/home-page", http.StatusSeeOther)
 		}
-		// Pasar la solicitud al siguiente manejador
+
 		next.ServeHTTP(w, r)
 	}
 }

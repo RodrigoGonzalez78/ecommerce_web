@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/RodrigoGonzalez78/ecommerce_web/db"
@@ -14,7 +13,7 @@ func MyOrdersPage(w http.ResponseWriter, r *http.Request) {
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 
 	sales, _ := db.UserSales(userData.ID)
-	fmt.Println(sales)
+
 	data := map[string]interface{}{
 		"Titulo":    "Mis Pedidos",
 		"IDProfile": userData.RolID,

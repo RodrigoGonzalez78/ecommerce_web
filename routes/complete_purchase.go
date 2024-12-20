@@ -14,6 +14,17 @@ func CompletePurchase(w http.ResponseWriter, r *http.Request) {
 
 	userData, _ := r.Context().Value("userData").(*models.Claim)
 
+	user, err := db.GetUser(userData.ID)
+
+	if err != nil {
+		http.Error(w, "Usuario no encontrado", http.StatusNotFound)
+		return
+	}
+	if user.IDAddress == nil {
+		http.Redirect(w, r, "/user-profile", http.StatusSeeOther)
+		return
+	}
+
 	// Leer la cookie del carrito
 	cartCookie, err := r.Cookie("cart")
 
