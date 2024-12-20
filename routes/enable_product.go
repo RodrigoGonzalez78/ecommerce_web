@@ -30,5 +30,5 @@ func EnableProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Redirect(w, r, "/products-page", http.StatusSeeOther)
+	http.Redirect(w, r, "/products", http.StatusSeeOther)
 }

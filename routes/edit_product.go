@@ -90,7 +90,7 @@ func EditProduct(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		http.Redirect(w, r, "/products-page", http.StatusSeeOther)
+		http.Redirect(w, r, "/products", http.StatusSeeOther)
 		return
 	}
 

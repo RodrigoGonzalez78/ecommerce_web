@@ -20,7 +20,7 @@ func ProductsPage(w http.ResponseWriter, r *http.Request) {
 		page, _ = strconv.Atoi(pageParam)
 	}
 
-	itemsPerPage := 2
+	itemsPerPage := 10
 
 	products, totalProducts, err := db.GetPaginatedProducts(search, page, itemsPerPage)
 	if err != nil {
