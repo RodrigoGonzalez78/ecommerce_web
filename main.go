@@ -64,8 +64,14 @@ func main() {
 	http.HandleFunc("/attended-consult", middleware.CheckJwt(middleware.AdminCheck(routes.AttendedConsult)))
 	http.HandleFunc("/archive-consult", middleware.CheckJwt(middleware.AdminCheck(routes.ArchiveConsult)))
 
-	log.Println("Servidor iniciado en el puerto 8080")
-	err := http.ListenAndServe(":8080", nil)
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	
+	log.Println("Servidor iniciado en el puerto " + port)
+	err := http.ListenAndServe(":"+port, nil)
 
 	if err != nil {
 		log.Fatalf("Error al iniciar el servidor: %v", err)
