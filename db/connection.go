@@ -7,15 +7,22 @@ import (
 	"gorm.io/gorm"
 )
 
-var DSN = "user=usuario password=12345678 dbname=ecommerce host=localhost port=5432 sslmode=disable"
+var DSN = "user=postgres password=12345678 dbname=ecommerce host=localhost port=5432 sslmode=disable"
 
 // Conexion de a la base de datos
 var db *gorm.DB
 
 func DBConnection() {
 
+
+	dsn := os.Getenv("DATABASE_URL")
+	
+	if dsn == "" {
+		log.Fatal("DATABASE_URL no está configurada")
+	}
+
 	var dbError error
-	db, dbError = gorm.Open(postgres.Open(DSN), &gorm.Config{})
+	db, dbError = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if dbError != nil {
 		log.Fatal(dbError)
