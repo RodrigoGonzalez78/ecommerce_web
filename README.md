@@ -1,47 +1,71 @@
+# 🖥️ E-commerce de Hardware
 
+Proyecto de tienda online especializada en la venta de componentes de computadora. Esta versión es una **reescritura completa** de un proyecto anterior desarrollado en PHP, ahora implementado con tecnologías modernas y un enfoque en la organización del backend.
 
+### ⚙️ Tecnologías utilizadas
 
-# Ecomerce de Hardware
+* 🧑‍💻 **Frontend:** HTML + Bootstrap
+* 🏗️ **Backend:** Golang con librerías nativas para el renderizado web
+* 🗃️ **Base de datos:** PostgreSQL con ORM **Gorm**
+* 🔐 **Autenticación:** JSON Web Tokens (JWT) y manejo nativo de cookies
+* 🧩 Librerías externas para facilitar la persistencia, autenticación y otras funcionalidades
 
-Un e-commerce enfocado al comercio de componentes de computadora. Este proyecto fue una reescritura de un proyecto anterior donde utilizaba PHP. Se desarrolló con HTML y Bootstrap, usando Golang y sus librerías nativas para el renderizado de componentes web, en conjunto con otras librerías de terceros como Gorm para conectarse con PostgreSQL, o JWT, una librería para manejar autenticación con JSON Web Tokens, también el manejo nativo de cookies, entre otros.
+### ✨ Funcionalidades destacadas
 
-## Algunas capturas del sistema
+* Registro e inicio de sesión de usuarios
+* Catálogo de productos con opción de compra
+* Carrito de compras funcional
+* Panel de administración para gestionar usuarios y productos
+* Visualización de facturas y perfil de usuario
+* Página de contacto
+
+---
+
+## 🖼️ Capturas del sistema
 
 ### Pantalla de Inicio
-![Captura1](/adicionales/home.png)
+
+![Inicio](/adicionales/home.png)
 
 ### Login
-![Captura1](/adicionales/login.png)
 
-### Signup
-![Captura2](/adicionales/signup.png)
+![Login](/adicionales/login.png)
+
+### Registro
+
+![Signup](/adicionales/signup.png)
 
 ### Productos
-![Captura3](/adicionales/products.png)
 
-### Carrito de Compra
-![Captura4](/adicionales/carrito_vacio.png)
-![Captura5](/adicionales/carrito.png)
+![Productos](/adicionales/products.png)
+
+### Carrito de Compras
+
+![Carrito vacío](/adicionales/carrito_vacio.png)
+![Carrito con productos](/adicionales/carrito.png)
 
 ### Crear nuevo producto
-![Captura7](/adicionales/nuevo_producto.png)
 
-### Editar datos del perfil
-![Captura8](/adicionales/Profile.png)
+![Nuevo producto](/adicionales/nuevo_producto.png)
 
-### Gestionar los usuarios
-![Captura9](/adicionales/gestion_clientes.png)
+### Editar Perfil
 
-### Pagina de Contacto
-![Captura10](/adicionales/contactanos.png)
+![Perfil](/adicionales/Profile.png)
 
-### Visor de la factura
-![Captura10](/adicionales/factura.png)
+### Gestión de Usuarios
 
+![Usuarios](/adicionales/gestion_clientes.png)
 
-## Informe
+### Contacto
 
-[Informe de requisitos](/adicionales/Informe%20de%20Requisitos-RodrigoGonzalez%20.pdf)
+![Contacto](/adicionales/contactanos.png)
 
+### Factura
 
+![Factura](/adicionales/factura.png)
 
+---
+
+## 📄 Documentación
+
+📘 [Informe de requisitos (PDF)](/adicionales/Informe%20de%20Requisitos-RodrigoGonzalez%20.pdf)
