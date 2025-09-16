@@ -42,6 +42,20 @@ CREATE TABLE profile (
   descrition VARCHAR(100) NOT NULL
 );
 
+-- Estructura de tabla para la tabla `users`
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(200) NOT NULL,
+  down TEXT NOT NULL DEFAULT 'NO',
+  id_address INT,
+  id_profile INT NOT NULL DEFAULT 2,
+  FOREIGN KEY (id_profile) REFERENCES profile(id),
+  FOREIGN KEY (id_address) REFERENCES addresses(id)
+);
+
 -- Estructura de tabla para la tabla `sales`
 CREATE TABLE sales (
   id SERIAL PRIMARY KEY,
@@ -62,16 +76,3 @@ CREATE TABLE sale_details (
   FOREIGN KEY (id_product) REFERENCES products(id)
 );
 
--- Estructura de tabla para la tabla `users`
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  last_name VARCHAR(50) NOT NULL,
-  email VARCHAR(100) NOT NULL,
-  password VARCHAR(200) NOT NULL,
-  down TEXT NOT NULL DEFAULT 'NO',
-  id_address INT,
-  id_profile INT NOT NULL DEFAULT 2,
-  FOREIGN KEY (id_profile) REFERENCES profile(id),
-  FOREIGN KEY (id_address) REFERENCES addresses(id)
-);
