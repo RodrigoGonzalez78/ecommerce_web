@@ -4,13 +4,11 @@ import (
 	"errors"
 	"time"
 
+	"github.com/RodrigoGonzalez78/ecommerce_web/config"
 	"github.com/RodrigoGonzalez78/ecommerce_web/db"
 	"github.com/RodrigoGonzalez78/ecommerce_web/models"
 	"github.com/golang-jwt/jwt/v5"
 )
-
-// SecretKey para firmar el token JWT
-var SecretKey = []byte("HarwareStore")
 
 // CreateToken genera un token JWT para un usuario dado
 func CreateToken(user models.User) (string, error) {
@@ -30,7 +28,7 @@ func CreateToken(user models.User) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)
 
 	// Firmar el token con la clave secreta
-	tokenString, err := token.SignedString(SecretKey)
+	tokenString, err := token.SignedString([]byte(config.Cnf.JWTSecret))
 	if err != nil {
 		return "", err
 	}
@@ -44,7 +42,7 @@ func ProcessToken(tokenString string) (*models.Claim, bool, uint, error) {
 
 	// Parsear el token con las reclamaciones y la clave secreta
 	token, err := jwt.ParseWithClaims(tokenString, claim, func(t *jwt.Token) (interface{}, error) {
-		return SecretKey, nil
+		return []byte(config.Cnf.JWTSecret), nil
 	})
 
 	if err != nil {

@@ -14,4 +14,4 @@ RUN go build -o ecommerce
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-CMD ["./main"]
+CMD ["./ecommerce"]

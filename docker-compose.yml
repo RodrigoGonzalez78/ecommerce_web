@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerce_app
+    depends_on:
+      - db
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://postgres:postgres@db:5432/ecommerce?sslmode=disable
+      SECRET_KEY_QR: default_qr_key
+      JWT_SECRET: supersecretjwt
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    container_name: ecommerce_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ecommerce
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db_sql:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  db_data:

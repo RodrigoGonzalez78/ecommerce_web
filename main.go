@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/RodrigoGonzalez78/ecommerce_web/config"
 	"github.com/RodrigoGonzalez78/ecommerce_web/db"
 	"github.com/RodrigoGonzalez78/ecommerce_web/middleware"
 	"github.com/RodrigoGonzalez78/ecommerce_web/routes"
@@ -12,6 +13,7 @@ import (
 
 func main() {
 
+	config.LoadConfig()
 	db.DBConnection()
 
 	assetsDir := http.Dir("assets")
@@ -64,14 +66,8 @@ func main() {
 	http.HandleFunc("/attended-consult", middleware.CheckJwt(middleware.AdminCheck(routes.AttendedConsult)))
 	http.HandleFunc("/archive-consult", middleware.CheckJwt(middleware.AdminCheck(routes.ArchiveConsult)))
 
-
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	
-	log.Println("Servidor iniciado en el puerto " + port)
-	err := http.ListenAndServe(":"+port, nil)
+	log.Println("Servidor iniciado en el puerto " + config.Cnf.Port)
+	err := http.ListenAndServe(":"+config.Cnf.Port, nil)
 
 	if err != nil {
 		log.Fatalf("Error al iniciar el servidor: %v", err)
