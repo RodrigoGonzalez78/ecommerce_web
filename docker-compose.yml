@@ -9,12 +9,12 @@ services:
     depends_on:
       - db
     environment:
-      PORT: 8080
+      PORT: 4000
       DATABASE_URL: postgres://postgres:postgres@db:5432/ecommerce?sslmode=disable
       SECRET_KEY_QR: default_qr_key
       JWT_SECRET: supersecretjwt
     ports:
-      - "8080:8080"
+      - "4000:4000"
     restart: unless-stopped
 
   db:
